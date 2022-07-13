@@ -11,9 +11,9 @@ class Books{
         $result = $stmt->fetch();
         $s=$db->prepare("INSERT INTO books(name,uname,quantity,date,month,year,status) VALUES (?,?,1,null,null,null,0)");
         $s->execute([$name,$uname]);
-        if($result->quantity >1){
+        if($result["quantity"] >1){
             $s=$db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
-            $s->execute([($result->quantity -1 ),$name]);
+            $s->execute([($result["quantity"]  -1 ),$name]);
         }
         else{
             $s=$db->prepare("DELETE FROM books WHERE status IS NULL AND name=?");
@@ -23,14 +23,14 @@ class Books{
 
     public static function returnbook($name,$uname){
         $db = \DB::get_instance();
-        $stmt= $db->prepare("INSERT INTO books VALUES(?,?,1,null,null,null,-1");
+        $stmt= $db->prepare("UPDATE books SET status=-1 WHERE name=? AND uname=?");
         $stmt->execute([$name,$uname]);
         $stmt=$db->prepare("DELETE FROM books WHERE status=1 AND name=? AND uname=?");
         $stmt->execute([$name,$uname]);
     }
-    public static function list1($uname){
+    public static function issuedbooks($uname){
         $db = \DB::get_instance();
-        $stmt= $db->prepare("SELECT * FROM books WHERE status=1 AND user=?");
+        $stmt= $db->prepare("SELECT * FROM books WHERE status=1 AND uname=?");
         $stmt->execute([$uname]);
         $result=$stmt->fetchAll();
         return $result;
@@ -44,23 +44,23 @@ class Books{
     }
     public static function requestedbooks($uname){
         $db = \DB::get_instance();
-        $stmt= $db->prepare("SELECT * FROM books WHERE status=0 AND user =?");
+        $stmt= $db->prepare("SELECT * FROM books WHERE status=0 AND uname =?");
         $stmt->execute([$uname]);
         $result=$stmt->fetchAll();
         return $result;
     }
     public static function rejectedrequests($uname){
         $db = \DB::get_instance();
-        $stmt= $db->prepare("SELECT * FROM books WHERE status=2 AND user =?");
+        $stmt= $db->prepare("SELECT * FROM books WHERE status=2 AND uname =?");
         $stmt->execute([$uname]);
         $result=$stmt->fetchAll();
-        $stmt= $db->prepare("DELETE FROM books WHERE status=2 AND user =?");
+        $stmt= $db->prepare("DELETE FROM books WHERE status=2 AND uname =?");
         $stmt->execute([$uname]);
         return $result;
     }
     public static function addbook($name,$quantity){
         $db = \DB::get_instance();
-        $stmt= $db->prepare("INSERT INTO  books VALUES(?,?,NULL,NULL,NULL,NULL)");
+        $stmt= $db->prepare("INSERT INTO  books VALUES(?,NULL,?,NULL,NULL,NULL,NULL)");
         $stmt->execute([$name,$quantity]);
     }
     public static function removebook($name,$quantity){
@@ -68,9 +68,9 @@ class Books{
         $stmt= $db->prepare("SELECT * FROM books WHERE status IS NULL AND name=?");
         $stmt->execute([$name]);
         $result=$stmt->fetchAll();
-        if(($result[0]->quantity)>$quantity){
+        if(($result[0]["quantity"])>$quantity){
             $s=$db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name =?");
-            $s->execute([($result[0]->quantity-$quantity),$name]);
+            $s->execute([($result[0]["quantity"]-$quantity),$name]);
         }
         else{
             $s=$db->prepare("DELETE FROM books WHERE status IS NULL AND name=?");
@@ -79,9 +79,9 @@ class Books{
     }
     public static function approved($name,$uname){
         $db = \DB::get_instance();
-        $stmt=$db->prepare("INSERT INTO books VALUES(?,?,1,?,?,?,1");
+        $stmt=$db->prepare("INSERT INTO books VALUES(?,?,1,?,?,?,1)");
         $stmt->execute([$name,$uname,date("d"),date("m"),date("Y")]);
-        $stmt=$db->prepare("DELETE FROM books WHERE name=? AND uname=? AND status=0");
+        $stmt=$db->prepare("DELETE FROM books WHERE name=? AND uname=? AND status=0 ");
         $stmt->execute([$name,$uname]);
     }
     public static function disapproved($name,$uname){
@@ -89,9 +89,9 @@ class Books{
         $stmt=$db->prepare("SELECT * FROM books WHERE status IS NULL AND name=?");
         $stmt->execute([$name]);
         $result=$stmt->fetchAll();
-        if(empty($result)){
+        if(!isset($result[0])){
             $s=$db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
-            $s->execute([($result[0]->quantity+1),$name]);   
+            $s->execute([($result[0]["quantity"]+1),$name]);   
         }
         else{
             $s=$db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL");
@@ -105,13 +105,13 @@ class Books{
         $stmt=$db->prepare("SELECT * FROM books where status IS NULL AND name=?");
         $stmt->execute([$name]);
         $result=$stmt->fetchAll();
-        if(empty($result)){
+        if(!isset($result[0])){
             $s=$db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
             $s->execute([$name]);
         }
         else{
             $s=$db->prepare("UPDATE books SET quantity=? WHERE status IS NULL and name=?");
-            $s->execute([($result[0]->quantity+1),$name]);
+            $s->execute([($result[0]["quantity"]+1),$name]);
         }
         $stmt=$db->prepare("DELETE FROM books WHERE status=-1 AND name=? AND uname=?");
         $stmt->execute([$name,$uname]);

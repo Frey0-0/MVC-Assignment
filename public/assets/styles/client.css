@@ -1,0 +1,85 @@
+* {
+    background-color: #25D366;
+    color: white;
+}
+
+#a {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+#b {
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+}
+
+
+#logout {
+    padding-left: 44vw;
+}
+
+#foo {
+    color: black;
+    background-color: rgb(234, 116, 20);
+    height: 50px;
+    width: 100px;
+}
+
+#button {
+    color: black;
+    background-color: rgb(234, 116, 20);
+}
+
+#buttons {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+#entry {
+    background-color: grey;
+}
+
+#lists {
+    display: flex;
+    flex-direction: row;
+    gap: 12vw;
+}
+
+#c {
+    display: flex;
+    flex-direction: column;
+}
+
+#heading {
+    color: rgb(242, 242, 14);
+}
+
+li {
+    color: black;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+#table{
+    width:12vw;
+}

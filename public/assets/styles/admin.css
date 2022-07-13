@@ -1,0 +1,89 @@
+* {
+    background-color: #3b5998;
+}
+
+#a {
+    display: flex;
+    flex-direction: row;
+    gap: 18vw;
+}
+
+#b {
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+}
+
+#books {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#logout {
+    padding-left: 44vw;
+}
+
+#foo {
+    color: black;
+    background-color: #D2042D;
+    height: 50px;
+    width: 100px;
+}
+
+#button {
+    color: black;
+    background-color: #D2042D;
+}
+
+#buttons {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+#entry {
+    background-color: grey;
+}
+
+#lists {
+    display: flex;
+    flex-direction: row;
+    gap: 20vw;
+}
+
+#c {
+    display: flex;
+    flex-direction: column;
+}
+
+#heading {
+    color: rgb(242, 242, 14);
+}
+
+li {
+    color: white;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#table {
+    width: 12vw;
+}

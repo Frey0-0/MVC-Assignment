@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../assets/styles/authorize.css" />
-    <title>Admin Portal</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="../assets/styles/authorize.css"/>
+		<title>Admin Portal</title>
+	</head>
 
-<body>
-    <div id="form">
-        <form action="/admin/auth" method="POST">
-            Username:<input type="text" name="uname" id="user">
-            <br><br>
-            Password: <input type="password" name="pass" id="pass">
-            <br><br>
-            <div id="buttons">
-                <div>
-                    <input type="submit" value="Login" id="login" />
-                </div>
-                <div>
-                    <input type="button" onclick="location.href='/admin/registeradmin';" value="Register Admin" id="register">
-                </div>
-            </div>
-        </form>
-    </div>
-</body>
+	<body>
+		<div id="form">
+			<form action="/admin/auth" method="POST">
+				Username:<input type="text" name="uname" id="user">
+				<br><br>
+				Password:
+				<input type="password" name="pass" id="pass">
+				<br><br>
+				<div id="buttons">
+					<div>
+						<input type="submit" value="Login" id="login"/>
+					</div>
+					<div>
+						<input type="button" onclick="location.href='/admin/newadmin';" value="Register Admin" id="register">
+					</div>
+				</div>
+			</form>
+		</div>
+	</body>
 
 </html>

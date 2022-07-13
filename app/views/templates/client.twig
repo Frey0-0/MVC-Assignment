@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="../assets/styles/client.css"/>
+		<title>Client Portal</title>
+	</head>
+	<body>
+		<br><br>
+		<h2>Hi {{ uname }}</h2>
+		<br><br>
+		<div id="lists">
+			<div id="c">
+				<h3>Your books</h3>
+				<div id="table">
+					<table>
+						{% if issuedbooks is not empty %}
+							<tr>
+								<th>Name</th>
+								<th>Action</th>
+							</tr>
+							{% for book in issuedbooks %}
+								<tr>
+									<td>
+										{{ book.name }}
+									</td>
+									<td>
+										<form action="/client/returnbook" method="POST">
+											<input type="text" name="name" id="entry" value="{{ book.name }}" style="display:none">
+											<input type="submit" id="button" value="Return Book"/>
+										</form>
+									</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+					</table>
+				</div>
+			</div>
+			<div id="c">
+				<h3>Requested Books</h3>
+				<div id="table">
+					<table>
+						{% if requestedbooks is not empty  %}
+							<tr>
+								<th>Name</th>
+							</tr>
+							{% for book in requestedbooks %}
+								<tr>
+									<td>
+										{{ book.name }}
+									</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+					</table>
+				</div>
+			</div>
+			<div id="c">
+				<h3>Rejected Requests</h3>
+				<div id="table">
+					<table>
+						{% if rejectedrequests is not empty %}
+							<tr>
+								<th>Name</th>
+							</tr>
+							{% for book in rejectedrequests %}
+								<tr>
+									<td>
+										{{ book.name }}
+									</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+					</table>
+				</div>
+			</div>
+			<div id="c">
+				<h3>Available Books</h3>
+				<div id="table">
+					<table>
+						{% if availablebooks is not empty %}
+							<tr>
+								<th>Name</th>
+								<th>Action</th>
+							</tr>
+							{% for book in availablebooks %}
+								<tr>
+									<td>
+										{{ book.name }}
+									</td>
+									<td>
+										<form action="/client/requestbook" method="POST">
+											<input type="text" name="name" id="entry" value="{{ book.name }}" style="display:none">
+											<input type="submit" id="button" value="Request Book"/>
+										</form>
+									</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<br><br><br><br>
+		<form action="/client/logout" method="post" id="logout">
+			<button name="foo" id="foo">Logout</button>
+		</form>
+	</body>
+
+</html>

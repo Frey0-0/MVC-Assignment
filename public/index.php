@@ -4,6 +4,7 @@ require __DIR__."/../vendor/autoload.php";
 
 Toro::serve(array(
     "/" => "\Controller\Home",
+    "/client/dashboard" =>"\Controller\ClientDashboard",
     "/client/auth" => "\Controller\Authenticate",
     "/client/newuser" => "\Controller\NewUser",
     "/client/requestbook" => "\Controller\RequestBook",
@@ -12,6 +13,7 @@ Toro::serve(array(
     "/admin/addbook" => "\Controller\AddBook",
     "/admin/removebook" => "\Controller\RemoveBook",
     "/admin/auth" => "\Controller\Authorize",
+    "/admin/dashboard" =>"\Controller\AdminDashboard",
     "/admin/logout" => "\Controller\Logout",
     "/admin/approved" => "\Controller\Approved",
     "/admin/disapproved" => "\Controller\Disapproved",
