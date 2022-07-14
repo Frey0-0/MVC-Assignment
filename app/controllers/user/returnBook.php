@@ -8,11 +8,11 @@ class ReturnBook
 {
     public function post()
     {
-        \Controller\Utils::LoggedInUser();
+        \Controller\Utils::loggedInUser();
 
         $name = $_POST["name"];
         $username = $_SESSION["username"];
-        \Model\Books::ReturnBook($name, $username);
+        \Model\Books::returnBook($name, $username);
         header("Location:/client/dashboard");
     }
 }

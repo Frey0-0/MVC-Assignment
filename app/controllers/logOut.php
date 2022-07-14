@@ -3,7 +3,7 @@
 namespace Controller;
 session_start();
 
-class Logout
+class LogOut
 {
     public function get()
     {

@@ -55,12 +55,21 @@ img {
 
 #button {
     color: black;
-    background-color: rgb(111, 234, 127);
+    background-color: rgb(218, 233, 123);
 }
 
 #button:hover {
     color: black;
+    background-color: rgb(111, 234, 127);
+}
+#button1 {
+    color: black;
     background-color: rgb(218, 233, 123);
+}
+
+#button1:hover {
+    color: black;
+    background-color: rgb(234, 111, 111);
 }
 
 #lists {
@@ -93,7 +102,7 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd6e;
+    background-color: #a1f5f1c0;
 }
 
 #table {

@@ -8,16 +8,16 @@ class RemoveBook
 {
     public function post()
     {
-        \Controller\Utils::LoggedInAdmin();
+        \Controller\Utils::loggedInAdmin();
 
         $name = $_POST["name"];
         $quantity = $_POST["quantity"];
-        $result=\Model\Books::RemoveBook($name, $quantity);
+        $result=\Model\Books::removeBook($name, $quantity);
         if (($result[0]["quantity"]) > $quantity) {
-            \Model\Books::RemoveBookUpdate($result[0]["quantity"] - $quantity, $name);
+            \Model\Books::removeBookUpdate($result[0]["quantity"] - $quantity, $name);
         }
         else{
-            \Model\Books::RemoveBookDelete($name);
+            \Model\Books::removeBookDelete($name);
         }
         header("Location:/admin/dashboard");
     }

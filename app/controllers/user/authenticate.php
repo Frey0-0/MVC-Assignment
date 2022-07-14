@@ -11,7 +11,7 @@ class Authenticate {
 
         $username=$_POST["username"];
         $password =$_POST["password"];
-        $result=\Model\Login::VerifyClient($username);
+        $result=\Model\LogIn::verifyClient($username);
         if(empty($result)){
             echo \View\Loader::make()->render("templates/authenticate.twig", array('flag' => true));
         }

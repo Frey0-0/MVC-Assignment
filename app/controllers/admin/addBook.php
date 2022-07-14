@@ -5,7 +5,7 @@ session_start();
 
 class AddBook {
     public function post(){
-        \Controller\Utils::LoggedInAdmin();
+        \Controller\Utils::loggedInAdmin();
 
         $name=$_POST["name"];
         $quantity =$_POST["quantity"];

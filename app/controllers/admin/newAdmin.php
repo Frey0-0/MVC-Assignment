@@ -16,13 +16,13 @@ class NewAdmin
         $username = $_POST["username"];
         $password = $_POST["password"];
         $passwordconfirm = $_POST["passwordconfirm"];
-        $result = \Model\Users::CheckAdmin($username);
+        $result = \Model\Users::checkAdmin($username);
         if (!empty($result)) {
             $flag = false;
         } else {
             $flag = true;
         }
-        $result = \Model\Users::CheckAdminReq($username);
+        $result = \Model\Users::checkAdminReq($username);
         if (!empty($result)) {
             $flag1 = false;
         } else {
@@ -34,7 +34,7 @@ class NewAdmin
             } 
             else if ($password == $passwordconfirm) {
                 $hash = password_hash($password, PASSWORD_DEFAULT);
-                \Model\Users::CreateAdminReq($username, $hash);
+                \Model\Users::createAdminReq($username, $hash);
                 echo \View\Loader::make()->render("templates/authorize.twig", array("flag1" => true));
             } 
             else {

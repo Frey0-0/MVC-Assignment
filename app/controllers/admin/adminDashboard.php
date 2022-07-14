@@ -5,11 +5,11 @@ session_start();
 
 class AdminDashboard {
     public function get(){
-        \Controller\Utils::LoggedInAdmin();
+        \Controller\Utils::loggedInAdmin();
         
         echo \View\Loader::make()->render("templates/admin.twig",array(
-            "availablebooks" => \Model\Books::AvailableBooks(),
-            "unavailablebooks" => \Model\Books::UnavailableBooks(),
+            "availablebooks" => \Model\Books::availableBooks(),
+            "unavailablebooks" => \Model\Books::unavailableBooks(),
             "username" => $_SESSION["username"], 
         ));
     }

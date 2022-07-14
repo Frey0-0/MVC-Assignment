@@ -10,7 +10,7 @@ class Authorize {
 
         $username=$_POST["username"];
         $password =$_POST["password"];
-        $result=\Model\Login::VerifyAdmin($username);
+        $result=\Model\LogIn::verifyAdmin($username);
         if(empty($result)){
             echo \View\Loader::make()->render("templates/authorize.twig", array('flag' => true));
         }

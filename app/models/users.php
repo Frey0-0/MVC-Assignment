@@ -5,7 +5,7 @@ namespace Model;
 
 class Users
 {
-    public static function CreateUser($username, $password)
+    public static function createUser($username, $password)
     {
         $db = \DB::get_instance();
         $status = 0;
@@ -13,7 +13,7 @@ class Users
         $stmt->execute([$username, $password, $status]);
     }
 
-    public static function CheckAdminReq($username)
+    public static function checkAdminReq($username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM adminreq WHERE username =?");
@@ -22,7 +22,7 @@ class Users
         return $result;
     }
 
-    public static function AdminReq()
+    public static function adminReq()
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM adminreq");
@@ -30,7 +30,7 @@ class Users
         $result = $stmt->fetchAll();
         return $result;
     }
-    public static function ApprovedAdmin($username)
+    public static function approvedAdmin($username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM adminreq WHERE username=?");
@@ -39,25 +39,25 @@ class Users
         return $result;
     }
 
-    public static function ApprovedAdminInsert($username, $password)
+    public static function approvedAdminInsert($username, $password)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("INSERT INTO users VALUES(?,?,1)");
         $stmt->execute([$username, $password]);
     }
-    public static function ApprovedAdminDelete($username)
+    public static function approvedAdminDelete($username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("DELETE FROM adminreq WHERE username=?");
         $stmt->execute([$username]);
     }
-    public static function DisapprovedAdmin($username)
+    public static function disapprovedAdmin($username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("DELETE FROM adminreq WHERE username=?");
         $stmt->execute([$username]);
     }
-    public static function CheckUser($username)
+    public static function checkUser($username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM users WHERE status=0 AND username =?");
@@ -65,7 +65,7 @@ class Users
         $result = $stmt->fetch();
         return $result;
     }
-    public static function CheckAdmin($username)
+    public static function checkAdmin($username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM users WHERE status=1 AND username =?");
@@ -73,7 +73,7 @@ class Users
         $result = $stmt->fetch();
         return $result;
     }
-    public static function CreateAdminReq($username, $hash)
+    public static function createAdminReq($username, $hash)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("INSERT INTO adminreq VALUES(?,?)");
