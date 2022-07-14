@@ -1,5 +1,4 @@
-CREATE DATABASE Library;
-use Library;
+
 CREATE TABLE users(
     uname varchar(255),
     pass varchar(255),

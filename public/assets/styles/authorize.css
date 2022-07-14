@@ -16,7 +16,7 @@ body {
 
  #form {
   width: 36vw;
-  background-color: rgba(26, 31, 72, 0.661);
+  background-color: rgba(57, 172, 229, 0.661);
   margin-left: 28vw;
   margin-top: 28vh;
   align-self: center;
@@ -58,11 +58,11 @@ p{
 } 
 #link{
   font-size: 1.2vw;
-  color:rgba(255, 255, 0, 0.455);
+  color:rgb(239, 243, 8);
   font-family: 'Roboto', sans-serif;
 }
 #link:hover{
-  color:rgba(255, 255, 0, 0.976) ;
+  color: rgba(149, 243, 8, 0.976);
 }
 #record{
     font-family: 'Roboto', sans-serif;

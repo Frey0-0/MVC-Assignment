@@ -51,13 +51,12 @@ img{
 }
 #button {
     color: black;
-    background-color: rgb(64, 232, 86);
+    background-color: rgb(111, 234, 127);
 }
 #button:hover {
     color: black;
-    background-color: rgb(95, 64, 232);
+    background-color: rgb(218, 233, 123);
 }
-
 #lists {
     display: flex;
     flex-direction: row;
