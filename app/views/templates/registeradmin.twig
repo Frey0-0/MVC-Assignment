@@ -6,21 +6,36 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../assets/styles/registeradmin.css"/>
-		<title>Client Portal</title>
+		<title>Admin Register</title>
 	</head>
-<body>
-    <div id="form">
-        <form action="/admin/newadmin" method="POST">
-            Username: <input type="text" name="uname" id="user">
-            <br>
-            Password:<input type="password" name="pass" id="pass">
-            <br>
-            Confirm Password:<input type="password" name="passc" id="passc">
-            <br>
-            <input type="submit" value="Register" id="register" />
-        </form>
-    </div>
-    <p id="pX">Password should be minimum of 8 characters long</p>
-</body>
-
+	<body>
+		<div id="form">
+			<div style="margin-left:2vw">
+				<form action="/admin/newadmin" method="POST">
+					Username:<input type="text" name="uname" id="user">
+					<br>
+					Password:<input type="password" name="pass" id="pass">
+					<br>
+					Confirm Password:<input type="password" name="passc" id="passc">
+					<br>
+					{% if flag %}
+						<p>Passwords don't match</p>
+					{% endif %}
+					{% if flag1 %}
+						<p>Please enter passowrd of appropriate length.</p>
+					{% endif %}
+					{% if flag2 %}
+						<p>Username already taken. Please use another name.</p>
+					{% endif %}
+					{% if not flag and not flag1 and not flag2 %}
+						<br>
+					{% endif %}
+					<div id="buttons">
+						<input type="submit" value="Register" id="register"/>
+					</div>
+				</form>
+			</div>
+		</div>
+		<p id="pX">Password should be minimum of 8 characters long</p>
+	</body>
 </html>

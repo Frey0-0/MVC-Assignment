@@ -8,11 +8,12 @@ class Authenticate {
     }
 
     public function post(){
+
         $uname=$_POST["uname"];
         $pass =$_POST["pass"];
         $result=\Model\Login::verifyClient($uname);
         if(empty($result)){
-            echo \View\Loader::make()->render("templates/notclient.twig");
+            echo \View\Loader::make()->render("templates/authenticate.twig", array('flag' => true));
         }
         else if(password_verify($pass,$result["pass"])){
             $_SESSION["uname"] = $uname;
@@ -21,7 +22,7 @@ class Authenticate {
             header("Location:/client/dashboard");
         }
         else{
-            echo \View\Loader::make()->render("templates/notclient.twig");
+            echo \View\Loader::make()->render("templates/authenticate.twig", array('flag' => true));
         }
     }
 }

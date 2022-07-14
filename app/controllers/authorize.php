@@ -7,11 +7,12 @@ class Authorize {
         echo \View\Loader::make()->render("templates/authorize.twig");
     }
     public function post(){
+
         $uname=$_POST["uname"];
         $pass =$_POST["pass"];
         $result=\Model\Login::verifyAdmin($uname);
         if(empty($result)){
-            echo \View\Loader::make()->render("templates/notadmin.twig");
+            echo \View\Loader::make()->render("templates/authorize.twig", array('flag' => true));
         }
         else if(password_verify($pass,$result["pass"])){
             $_SESSION["uname"] = $uname;
@@ -20,7 +21,7 @@ class Authorize {
             header("Location:/admin/dashboard");
         }
         else{
-            echo \View\Loader::make()->render("templates/notadmin.twig");
+            echo \View\Loader::make()->render("templates/authorize.twig", array('flag' => true));
         }
     }
 }

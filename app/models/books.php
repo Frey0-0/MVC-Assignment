@@ -89,12 +89,12 @@ class Books{
         $stmt=$db->prepare("SELECT * FROM books WHERE status IS NULL AND name=?");
         $stmt->execute([$name]);
         $result=$stmt->fetchAll();
-        if(!isset($result[0])){
+        if(isset($result[0])){
             $s=$db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
             $s->execute([($result[0]["quantity"]+1),$name]);   
         }
         else{
-            $s=$db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL");
+            $s=$db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
             $s->execute([$name]);
         }
         $stmt=$db->prepare("UPDATE books SET status=2 WHERE uname=? AND name=? AND status=0");
@@ -118,7 +118,7 @@ class Books{
     }
     public static function disapprovedreturn($name,$uname){
         $db = \DB::get_instance();
-        $stmt=$db->prepare("UPDATE books SET status=2 WHERE uname=? AND name=? AND status=-1");
+        $stmt=$db->prepare("UPDATE books SET status=1 WHERE uname=? AND name=? AND status=-1");
         $stmt->execute([$uname,$name]);
     }
     public static function unavailablebooks(){

@@ -16,13 +16,11 @@ class NewUser
         $uname = $_POST["uname"];
         $pass = $_POST["pass"];
         $passc = $_POST["passc"];
-        echo $uname;
-        echo $pass;
-        echo $passc;
-        $s= \Model\Users::checkuser($uname);
-        echo isset($s);
         if (\Model\Users::checkuser($uname)) {
-            if ($pass == $passc) {
+            if(strlen($pass)<8){
+                echo \View\Loader::make()->render("templates/register.twig", array( "flag1" =>true));
+            }
+            else if ($pass == $passc) {
                 $hash = password_hash($pass, PASSWORD_DEFAULT);
                 \Model\Users::createuser($uname, $hash);
                 $_SESSION["uname"] = $uname;
@@ -30,6 +28,12 @@ class NewUser
                 $_SESSION["loggedin"] = 1;
                 header("Location:/client/dashboard");
             }
+            else{
+                echo \View\Loader::make()->render("templates/register.twig", array( "flag" =>true));
+            }
+        }
+        else{
+            echo \View\Loader::make()->render("templates/register.twig", array( "flag2" =>true));
         }
     }
 }

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="../assets/styles/admin.css"/>
+		<title>Admin Portal</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a class="active" href="/admin/dashboard">Home</a>
+			<a href="/admin/checkin_out">Checkins & Checkouts</a>
+			<a href="/admin/showadminreq">Admin Requests</a>
+		</div>
+		<div id="profile">
+			<div id="icon">
+				<img src="/assets/images/icon.png">
+				<p>
+					{{ uname }}</p>
+			</div>
+			<form action="/admin/logout" method="get" id="logout">
+				<button name="foo" id="foo">Logout</button>
+			</form>
+		</div>
+		<div id="lists">
+			<div id="c" style="margin-left:2vw">
+				<h2>
+					<u>List of Checkouts</u>
+				</h2>
+				<div id="table">
+					{% if checkout is not empty  %}
+						<table>
+							<tr>
+								<th>Name</th>
+								<th>User</th>
+								<th>Action</th>
+								<th>Action</th>
+							</tr>
+							{% for book in checkout %}
+								<tr>
+									<td>
+										{{ book.name }}
+									</td>
+									<td>
+										{{ book.uname }}
+									</td>
+									<div id="buttons">
+										<td>
+											<form action="/admin/approved" method="POST">
+												<input type="text" name="name" value="{{ book.name }}" style="display:none">
+												<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
+												<input type="submit" value="Approve" id="button">
+											</form>
+										</td>
+										<td>
+											<form action="/admin/disapproved" method="POST">
+												<input type="text" name="name" value="{{ book.name }}" style="display:none">
+												<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
+												<input type="submit" value="Disapprove" id="button">
+											</form>
+										</td>
+									</div>
+								</tr>
+							{% endfor %}
+						{% endif %}
+					</table>
+				</div>
+				<br>
+			</div>
+			<div id="c">
+				<h2>
+					<u>List of Checkins</u>
+				</h2>
+				<div id="table">
+					<table>
+						{% if checkin is not empty  %}
+							<tr>
+								<th>Name</th>
+								<th>User</th>
+								<th>Fees</th>
+								<th>Action</th>
+								<th>Action</th>
+							</tr>
+							{% for book in checkin %}
+								{% set fees=("now"|date("Y") - book.year) * 365 + ("now"|date("m") - book.month) *
+                                    30 + ("now"|date("d")- book.date) %}
+								<tr>
+									<td>
+										{{ book.name }}
+									</td>
+									<td>
+										{{ book.uname }}
+									</td>
+									<td>
+										{{ fees }}
+									</td>
+									<div id="buttons">
+										<td>
+											<form action="/admin/approvedreturn" method="POST">
+												<input type="text" name="name" value="{{ book.name }}" style="display:none">
+												<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
+												<input type="submit" value="Approve" id="button">
+											</form>
+										</td>
+										<td>
+											<form action="/admin/disapprovedreturn" method="POST">
+												<input type="text" name="name" value="{{ book.name }}" style="display:none">
+												<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
+												<input type="submit" value="Disapprove" id="button">
+											</form>
+										</td>
+									</tr>
+								</tr>
+
+							{% endfor %}
+						{% endif %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

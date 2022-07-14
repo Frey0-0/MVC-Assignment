@@ -9,12 +9,26 @@
 		<title>Client Portal</title>
 	</head>
 	<body>
-		<br><br>
-		<h2>Hi {{ uname }}</h2>
-		<br><br>
+		<div class="topnav">
+			<a class="active" href="/client/dashboard">Home</a>
+			<a href="/client/requestedbooks">Requested Books</a>
+			<a href="/client/rejectedrequests">Rejected Requests</a>
+		</div>
+		<div id="profile">
+			<div id="icon">
+				<img src="/assets/images/icon.png">
+				<p>
+					{{ uname }}</p>
+			</div>
+			<form action="/client/logout" method="get" id="logout">
+				<button name="foo" id="foo">Logout</button>
+			</form>
+		</div>
 		<div id="lists">
-			<div id="c">
-				<h3>Your books</h3>
+			<div id="c" style="margin-left:2vw">
+				<h2>
+					<u>Your books</u>
+				</h2>
 				<div id="table">
 					<table>
 						{% if issuedbooks is not empty %}
@@ -40,45 +54,9 @@
 				</div>
 			</div>
 			<div id="c">
-				<h3>Requested Books</h3>
-				<div id="table">
-					<table>
-						{% if requestedbooks is not empty  %}
-							<tr>
-								<th>Name</th>
-							</tr>
-							{% for book in requestedbooks %}
-								<tr>
-									<td>
-										{{ book.name }}
-									</td>
-								</tr>
-							{% endfor %}
-						{% endif %}
-					</table>
-				</div>
-			</div>
-			<div id="c">
-				<h3>Rejected Requests</h3>
-				<div id="table">
-					<table>
-						{% if rejectedrequests is not empty %}
-							<tr>
-								<th>Name</th>
-							</tr>
-							{% for book in rejectedrequests %}
-								<tr>
-									<td>
-										{{ book.name }}
-									</td>
-								</tr>
-							{% endfor %}
-						{% endif %}
-					</table>
-				</div>
-			</div>
-			<div id="c">
-				<h3>Available Books</h3>
+				<h2>
+					<u>Available Books</u>
+				</h2>
 				<div id="table">
 					<table>
 						{% if availablebooks is not empty %}
@@ -93,7 +71,7 @@
 									</td>
 									<td>
 										<form action="/client/requestbook" method="POST">
-											<input type="text" name="name" id="entry" value="{{ book.name }}" style="display:none">
+											<input type="text" name="name" value="{{ book.name }}" style="display:none">
 											<input type="submit" id="button" value="Request Book"/>
 										</form>
 									</td>
@@ -104,11 +82,5 @@
 				</div>
 			</div>
 		</div>
-
-		<br><br><br><br>
-		<form action="/client/logout" method="post" id="logout">
-			<button name="foo" id="foo">Logout</button>
-		</form>
 	</body>
-
 </html>

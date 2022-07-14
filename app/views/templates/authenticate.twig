@@ -6,27 +6,36 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../assets/styles/authenticate.css"/>
-		<title>Client Portal</title>
+		<title>Client Login</title>
 	</head>
 
 	<body>
 		<div id="form">
-			<form action="/client/auth" method="POST">
-				Username:<input type="text" name="uname" id="user">
-				<br><br>
-				Password:
-				<input type="password" name="pass" id="pass">
-				<br><br>
-				<div id="buttons">
-					<div>
-						<input type="submit" value="Login" id="login"/>
+			<div style="margin-left:2vw">
+				<form action="/client/auth" method="POST">
+					Username:<input type="text" name="uname" id="user">
+					<br><br>
+					Password:
+					<input type="password" name="pass" id="pass">
+					<br>
+					{% if flag %}
+						<p>Invalid Username or Password</p>
+
+					{% endif %}
+					{% if not flag %}
+						<br>
+					{% endif %}
+					<div id="buttons">
+						<div>
+							<input type="submit" value="Login" id="login"/>
+						</div>
+						<div>
+							<a id="link" href="/client/newuser">New User? Register!</a>
+						</div>
 					</div>
-					<div>
-						<input type="button" id="register" onclick="location.href='/client/newuser';" value="New User? Register!">
-					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</body>
 
-</html>
+</html></body></html>

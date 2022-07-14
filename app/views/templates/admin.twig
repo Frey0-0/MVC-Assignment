@@ -9,10 +9,27 @@
 		<title>Admin Portal</title>
 	</head>
 	<body>
-		<div id="a">
-			<div id="books">
-            <h3>Available Books</h3>
-				<div id="table" style="width:20vw">
+		<div class="topnav">
+			<a class="active" href="/admin/dashboard">Home</a>
+			<a href="/admin/checkin_out">Checkins & Checkouts</a>
+			<a href="/admin/showadminreq">Admin Requests</a>
+		</div>
+		<div id="profile">
+			<div id="icon">
+				<img src="/assets/images/icon.png">
+				<p>
+					{{ uname }}</p>
+			</div>
+			<form action="/admin/logout" method="get" id="logout">
+				<button name="foo" id="foo">Logout</button>
+			</form>
+		</div>
+		<div id="lists">
+			<div id="c" style="margin-left:2vw">
+				<h2>
+					<u>Available Books</u>
+				</h2>
+				<div id="table">
 					<table>
 						{% if availablebooks is not empty %}
 							<tr>
@@ -34,8 +51,10 @@
 				</div>
 			</div>
 
-			<div id="books">
-				<h3>Books with Clients</h3>
+			<div id="c">
+				<h2>
+					<u>Books with Clients</u>
+				</h2>
 				<div id="table">
 					<table>
 						{% if unavailablebooks is not empty  %}
@@ -59,150 +78,24 @@
 			</div>
 		</div>
 		<div id="b">
-			<form action="/admin/addbook" method="POST">
-				<br>
-				<input type="text" name="name" id="entry" placeholder="BOOK NAME">
-				<input type="text" name="quantity" id="entry" placeholder="Quantity">
-				<br><br>
-				<input type="submit" id="button" value="Add Book"/>
-			</form>
-			<form action="/admin/removebook" method="POST">
-				<br>
-				<input type="text" name="name" id="entry" placeholder="BOOK NAME">
-				<input type="text" name="quantity" id="entry" placeholder="Quantity">
-				<br><br>
-				<input type="submit" id="button" value="Remove Book"/>
-			</form>
-		</div>
-		<br><br>
-		<div id="lists">
-			<div id="c">
-				<h4 id>List of Checkouts</h4>
-				<div id="table">
-					{% if checkout is not empty  %}
-						<table>
-							<tr>
-								<th>Name</th>
-								<th>User</th>
-								<th>Action</th>
-								<th>Action</th>
-							</tr>
-							{% for book in checkout %}
-								<tr>
-									<td>
-										{{ book.name }}
-									</td>
-									<td>
-										{{ book.uname }}
-									</td>
-									<div id="buttons">
-										<td>
-											<form action="/admin/approved" method="POST">
-												<input type="text" name="name" value="{{ book.name }}" style="display:none">
-												<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
-												<input type="submit" value="Approve" id="button">
-											</form>
-										</td>
-										<td>
-											<form action="/admin/disapproved" method="POST">
-												<input type="text" name="name" value="{{ book.name }}" style="display:none">
-												<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
-												<input type="submit" value="Disapprove" id="button">
-											</form>
-										</td>
-									</div>
-								</tr>
-							{% endfor %}
-						{% endif %}
-					</table>
-				</div>
-				<br>
+			<div id="add">
+				<form action="/admin/addbook" method="POST">
+					<br>
+					<input type="text" name="name" id="entry" placeholder="BOOK NAME">
+					<input type="text" name="quantity" id="entry" placeholder="Quantity">
+					<br><br>
+					<input type="submit" id="button" value="Add Book"/>
+				</form>
 			</div>
-			<div id="c">
-				<h4>List of Checkins</h4>
-				<div id="table">
-					<table>
-						{% if checkin is not empty  %}
-							<tr>
-								<th>Name</th>
-								<th>User</th>
-								<th>Fees</th>
-								<th>Action</th>
-								<th>Action</th>
-							</tr>
-							{% for book in checkin %}
-								{% set fees=("now"|date("Y") - book.year) * 365 + ("now"|date("m") - book.month) *
-                                    30 + ("now"|date("d")- book.date) %}
-								<tr>
-									<td>
-										{{ book.name }}
-									</td>
-									<td>
-										{{ book.uname }}
-									</td>
-									<td>
-										{{ fees }}
-									</td>
-									<div id="buttons">
-										<td>
-											<form action="/admin/approvedreturn" method="POST">
-												<input type="text" name="name" value="{{ book.name }}" style="display:none">
-												<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
-												<input type="submit" value="Approve" id="button">
-											</form>
-										</td>
-										<td>
-											<form action="/admin/disapprovedreturn" method="POST">
-												<input type="text" name="name" value="{{ book.name }}" style="display:none">
-												<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
-												<input type="submit" value="Disapprove" id="button">
-											</form>
-										</td>
-									</tr>
-								</tr>
-							</div>
-						{% endfor %}
-					{% endif %}
-				</table>
+			<div id="remove">
+				<form action="/admin/removebook" method="POST">
+					<br>
+					<input type="text" name="name" id="entry" placeholder="BOOK NAME">
+					<input type="text" name="quantity" id="entry" placeholder="Quantity">
+					<br><br>
+					<input type="submit" id="button" value="Remove Book"/>
+				</form>
 			</div>
 		</div>
-		<div id="c">
-			<h4>Admin Requests</h4>
-			<div id="table">
-				<table>
-					{% if adminreq is not empty  %}
-						<tr>
-							<th>User</th>
-							<th>Action</th>
-							<th>Action</th>
-						</tr>
-						{% for request in adminreq %}
-							<tr>
-								<td>
-									{{ request.uname }}
-								</td>
-
-								<div id="buttons">
-									<td>
-										<form action="/admin/approvedadmin" method="POST">
-											<input type="text" name="name" value="{{ request.uname }}" style="display:none">
-											<input type="submit" value="Approve" id="button">
-										</form>
-									</td>
-									<td>
-										<form action="/admin/disapprovedadmin" method="POST">
-											<input type="text" name="name" value="{{ request.uname }}" style="display:none">
-											<input type="submit" value="Disapprove" id="button">
-										</form>
-									</td>
-								</div>
-							</tr>
-
-						{% endfor %}
-					{% endif %}
-				</table>
-			</div>
-		</body>
 	</body>
-</html></div></div><br><br><br><div><form action="/admin/logout" method="post" id="logout">
-<button id="foo">Logout</button></form></div></body></html>
+</html>

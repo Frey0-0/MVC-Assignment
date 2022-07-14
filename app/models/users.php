@@ -19,7 +19,7 @@ class Users
         $stmt = $db->prepare("SELECT * FROM adminreq WHERE uname =?");
         $stmt->execute([$uname]);
         $result = $stmt->fetch();
-        if (!isset($result))
+        if (!empty($result))
             return false;
         else
             return true;
@@ -38,7 +38,7 @@ class Users
         $stmt = $db->prepare("SELECT * FROM adminreq WHERE uname=?");
         $stmt->execute([$uname]);
         $result = $stmt->fetchAll();
-        $stmt = $db->prepare("INSERT INTO users VALUES(?,?,1");
+        $stmt = $db->prepare("INSERT INTO users VALUES(?,?,1)");
         $stmt->execute([$uname, $result[0]["pass"]]);
         $stmt = $db->prepare("DELETE FROM adminreq WHERE uname=?");
         $stmt->execute([$uname]);
@@ -55,7 +55,7 @@ class Users
         $stmt = $db->prepare("SELECT * FROM users WHERE status=0 AND uname =?");
         $stmt->execute([$uname]);
         $result = $stmt->fetch();
-        if (!isset($result)) {
+        if ( !empty($result)) {
             return false;
         } else {
             return true;
@@ -67,7 +67,7 @@ class Users
         $stmt = $db->prepare("SELECT * FROM users WHERE status=1 AND uname =?");
         $stmt->execute([$uname]);
         $result = $stmt->fetch();
-        if (!isset($result))
+        if (!empty($result))
             return false;
         else
             return true;

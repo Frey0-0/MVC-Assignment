@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="../assets/styles/client.css"/>
+		<title>Client Portal</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a class="active" href="/client/dashboard">Home</a>
+			<a href="/client/requestedbooks">Requested Books</a>
+			<a href="/client/rejectedrequests">Rejected Requests</a>
+		</div>
+		<div id="profile">
+			<div id="icon">
+				<img src="/assets/images/icon.png">
+				<p>
+					{{ uname }}</p>
+			</div>
+			<form action="/client/logout" method="get" id="logout">
+				<button name="foo" id="foo">Logout</button>
+			</form>
+		</div>
+		<div id="c1">
+			<div>
+				<h2>
+					<u>Requested Books</u>
+				</h2>
+			</div>
+			<div>
+				<table>
+					{% if requestedbooks is not empty  %}
+						<tr>
+							<th>Name</th>
+						</tr>
+						{% for book in requestedbooks %}
+							<tr>
+								<td>
+									{{ book.name }}
+								</td>
+							</tr>
+						{% endfor %}
+					{% endif %}
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
