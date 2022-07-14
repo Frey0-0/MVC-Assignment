@@ -2,7 +2,6 @@
 
 namespace Model;
 
-session_start();
 
 class Users
 {

@@ -33,7 +33,7 @@ echo "?>" >>config.php
 
 cd ..
 
-mysql -u $DB_USERNAME -p $DB_NAME <schema/setup.sql
+mysql -u $DB_USERNAME -p $DB_NAME <schema/schema.sql
 
 echo "Starting server at port 5000"
 cd public

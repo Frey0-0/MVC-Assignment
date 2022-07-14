@@ -1,101 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "templates/base.twig" %}
 
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="../assets/styles/admin.css"/>
-		<title>Admin Portal</title>
-	</head>
-	<body>
-		<div class="topnav">
-			<a class="active" href="/admin/dashboard">Home</a>
-			<a href="/admin/checkin_out">Checkins & Checkouts</a>
-			<a href="/admin/showadminreq">Admin Requests</a>
+{% block css %}"../assets/styles/admin.css"{% endblock %}
+
+{% block title %}Admin Portal{% endblock %}
+{% block body %}
+	<div class="topnav">
+		<a class="active" href="/admin/dashboard">Home</a>
+		<a href="/admin/checkin_out">Checkins & Checkouts</a>
+		<a href="/admin/showadminreq">Admin Requests</a>
+	</div>
+	<div id="profile">
+		<div id="icon">
+			<img src="/assets/images/icon.png">
+			<p>
+				{{ uname }}</p>
 		</div>
-		<div id="profile">
-			<div id="icon">
-				<img src="/assets/images/icon.png">
-				<p>
-					{{ uname }}</p>
+		<form action="/admin/logout" method="get" id="logout">
+			<button name="foo" id="foo">Logout</button>
+		</form>
+	</div>
+	<div id="lists">
+		<div id="c" style="margin-left:2vw">
+			<h2>
+				<u>Available Books</u>
+			</h2>
+			<div id="table">
+				<table>
+					{% if availablebooks is not empty %}
+						<tr>
+							<th>Name</th>
+							<th>Quantity</th>
+						</tr>
+						{% for book in availablebooks %}
+							<tr>
+								<td>
+									{{ book.name }}
+								</td>
+								<td>
+									{{ book.quantity }}
+								</td>
+							</tr>
+						{% endfor %}
+					{% endif %}
+				</table>
 			</div>
-			<form action="/admin/logout" method="get" id="logout">
-				<button name="foo" id="foo">Logout</button>
+		</div>
+
+		<div id="c">
+			<h2>
+				<u>Books with Clients</u>
+			</h2>
+			<div id="table">
+				<table>
+					{% if unavailablebooks is not empty  %}
+						<tr>
+							<th>Name</th>
+							<th>User</th>
+						</tr>
+						{% for book in unavailablebooks %}
+							<tr>
+								<td>
+									{{ book.name }}
+								</td>
+								<td>
+									{{ book.uname }}
+								</td>
+							</tr>
+						{% endfor %}
+					{% endif %}
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="b">
+		<div id="add">
+			<form action="/admin/addbook" method="POST">
+				<br>
+				<input type="text" name="name" id="entry" placeholder="BOOK NAME">
+				<input type="text" name="quantity" id="entry" placeholder="Quantity">
+				<br><br>
+				<input type="submit" id="button" value="Add Book"/>
 			</form>
 		</div>
-		<div id="lists">
-			<div id="c" style="margin-left:2vw">
-				<h2>
-					<u>Available Books</u>
-				</h2>
-				<div id="table">
-					<table>
-						{% if availablebooks is not empty %}
-							<tr>
-								<th>Name</th>
-								<th>Quantity</th>
-							</tr>
-							{% for book in availablebooks %}
-								<tr>
-									<td>
-										{{ book.name }}
-									</td>
-									<td>
-										{{ book.quantity }}
-									</td>
-								</tr>
-							{% endfor %}
-						{% endif %}
-					</table>
-				</div>
-			</div>
-
-			<div id="c">
-				<h2>
-					<u>Books with Clients</u>
-				</h2>
-				<div id="table">
-					<table>
-						{% if unavailablebooks is not empty  %}
-							<tr>
-								<th>Name</th>
-								<th>User</th>
-							</tr>
-							{% for book in unavailablebooks %}
-								<tr>
-									<td>
-										{{ book.name }}
-									</td>
-									<td>
-										{{ book.uname }}
-									</td>
-								</tr>
-							{% endfor %}
-						{% endif %}
-					</table>
-				</div>
-			</div>
+		<div id="remove">
+			<form action="/admin/removebook" method="POST">
+				<br>
+				<input type="text" name="name" id="entry" placeholder="BOOK NAME">
+				<input type="text" name="quantity" id="entry" placeholder="Quantity">
+				<br><br>
+				<input type="submit" id="button" value="Remove Book"/>
+			</form>
 		</div>
-		<div id="b">
-			<div id="add">
-				<form action="/admin/addbook" method="POST">
-					<br>
-					<input type="text" name="name" id="entry" placeholder="BOOK NAME">
-					<input type="text" name="quantity" id="entry" placeholder="Quantity">
-					<br><br>
-					<input type="submit" id="button" value="Add Book"/>
-				</form>
-			</div>
-			<div id="remove">
-				<form action="/admin/removebook" method="POST">
-					<br>
-					<input type="text" name="name" id="entry" placeholder="BOOK NAME">
-					<input type="text" name="quantity" id="entry" placeholder="Quantity">
-					<br><br>
-					<input type="submit" id="button" value="Remove Book"/>
-				</form>
-			</div>
-		</div>
-	</body>
-</html>
+	</div>
+{% endblock %}

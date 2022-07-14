@@ -1,68 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "templates/base.twig" %}
 
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="../assets/styles/admin.css"/>
-		<title>Admin Portal</title>
-	</head>
-	<body>
-		<div class="topnav">
-			<a class="active" href="/admin/dashboard">Home</a>
-			<a href="/admin/checkin_out">Checkins & Checkouts</a>
-			<a href="/admin/showadminreq">Admin Requests</a>
+{% block css %}"../assets/styles/admin.css"{% endblock %}
+
+{% block title %}Admin Portal{% endblock %}
+{% block body %}
+	<div class="topnav">
+		<a class="active" href="/admin/dashboard">Home</a>
+		<a href="/admin/checkin_out">Checkins & Checkouts</a>
+		<a href="/admin/showadminreq">Admin Requests</a>
+	</div>
+	<div id="profile">
+		<div id="icon">
+			<img src="/assets/images/icon.png">
+			<p>
+				{{ uname }}</p>
 		</div>
-		<div id="profile">
-			<div id="icon">
-				<img src="/assets/images/icon.png">
-				<p>
-					{{ uname }}</p>
-			</div>
-			<form action="/admin/logout" method="get" id="logout">
-				<button name="foo" id="foo">Logout</button>
-			</form>
+		<form action="/admin/logout" method="get" id="logout">
+			<button name="foo" id="foo">Logout</button>
+		</form>
+	</div>
+	<div id="c1">
+		<div>
+			<h2>
+				<u>Admin Requests</u>
+			</h2>
 		</div>
-		<div id="c1">
-			<div>
-				<h2>
-					<u>Admin Requests</u>
-				</h2>
-			</div>
-			<div>
-				<table>
-					{% if adminreq is not empty  %}
+		<div>
+			<table>
+				{% if adminreq is not empty  %}
+					<tr>
+						<th>User</th>
+						<th>Action</th>
+						<th>Action</th>
+					</tr>
+					{% for request in adminreq %}
 						<tr>
-							<th>User</th>
-							<th>Action</th>
-							<th>Action</th>
-						</tr>
-						{% for request in adminreq %}
-							<tr>
-								<td>
-									{{ request.uname }}
-								</td>
+							<td>
+								{{ request.uname }}
+							</td>
 
-								<div id="buttons">
-									<td>
-										<form action="/admin/approvedadmin" method="POST">
-											<input type="text" name="uname" value="{{ request.uname }}" style="display:none">
-											<input type="submit" value="Approve" id="button">
-										</form>
-									</td>
-									<td>
-										<form action="/admin/disapprovedadmin" method="POST">
-											<input type="text" name="uname" value="{{ request.uname }}" style="display:none">
-											<input type="submit" value="Disapprove" id="button">
-										</form>
-									</td>
-								</div>
-							</tr>
-						{% endfor %}
-					{% endif %}
-				</table>
-			</div>
+							<div id="buttons">
+								<td>
+									<form action="/admin/approvedadmin" method="POST">
+										<input type="text" name="uname" value="{{ request.uname }}" style="display:none">
+										<input type="submit" value="Approve" id="button">
+									</form>
+								</td>
+								<td>
+									<form action="/admin/disapprovedadmin" method="POST">
+										<input type="text" name="uname" value="{{ request.uname }}" style="display:none">
+										<input type="submit" value="Disapprove" id="button">
+									</form>
+								</td>
+							</div>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			</table>
 		</div>
-	</body>
-</html>
+	</div>
+{% endblock %}

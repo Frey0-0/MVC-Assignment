@@ -1,7 +1,7 @@
 <?php
 
 namespace Model;
-session_start();
+
  
 class Login{
     public static function verifyClient($uname){

@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "templates/base.twig" %}
 
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="../assets/styles/client.css"/>
-		<title>Client Portal</title>
-	</head>
-	<body>
+{% block css %}"../assets/styles/client.css"{% endblock %}
+
+{% block title %}Client Portal{% endblock %}
+{% block body %}
 		<div class="topnav">
 			<a class="active" href="/client/dashboard">Home</a>
 			<a href="/client/requestedbooks">Requested Books</a>
@@ -45,5 +40,4 @@
 				</table>
 			</div>
 		</div>
-	</body>
-</html>
+{% endblock %}
