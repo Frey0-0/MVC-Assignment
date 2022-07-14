@@ -10,14 +10,14 @@ class RequestBook
     {
         \Controller\Utils::LoggedInUser();
         $name = $_POST["name"];
-        $uname = $_SESSION["uname"];
-        $result = \Model\Books::requestbook($name, $uname);
+        $username = $_SESSION["username"];
+        $result = \Model\Books::RequestBook($name, $username);
         if ($result["quantity"] > 1) {
             $quantity=$result["quantity"];
-            \Model\Books::requestbookupdate($quantity, $uname);
+            \Model\Books::RequestBookUpdate($quantity, $username);
         }
         else{
-            \Model\Books::requestbookdelete($uname);
+            \Model\Books::RequestBookDelete($username);
         }
         header("Location:/client/dashboard");
     }

@@ -11,8 +11,8 @@ class ReturnBook
         \Controller\Utils::LoggedInUser();
 
         $name = $_POST["name"];
-        $uname = $_SESSION["uname"];
-        \Model\Books::returnbook($name, $uname);
+        $username = $_SESSION["username"];
+        \Model\Books::ReturnBook($name, $username);
         header("Location:/client/dashboard");
     }
 }

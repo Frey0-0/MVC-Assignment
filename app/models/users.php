@@ -5,27 +5,24 @@ namespace Model;
 
 class Users
 {
-    public static function createuser($uname, $pass)
+    public static function CreateUser($username, $password)
     {
         $db = \DB::get_instance();
         $status = 0;
-        $stmt = $db->prepare("INSERT INTO users (uname,pass,status) VALUES (?,?,?)");
-        $stmt->execute([$uname, $pass, $status]);
+        $stmt = $db->prepare("INSERT INTO users (username,password,status) VALUES (?,?,?)");
+        $stmt->execute([$username, $password, $status]);
     }
 
-    public static function checkadminreq($uname)
+    public static function CheckAdminReq($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM adminreq WHERE uname =?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("SELECT * FROM adminreq WHERE username =?");
+        $stmt->execute([$username]);
         $result = $stmt->fetch();
-        if (!empty($result))
-            return false;
-        else
-            return true;
+        return $result;
     }
-    
-    public static function adminreq()
+
+    public static function AdminReq()
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM adminreq");
@@ -33,50 +30,53 @@ class Users
         $result = $stmt->fetchAll();
         return $result;
     }
-    public static function approvedadmin($uname)
+    public static function ApprovedAdmin($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM adminreq WHERE uname=?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("SELECT * FROM adminreq WHERE username=?");
+        $stmt->execute([$username]);
         $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public static function ApprovedAdminInsert($username, $password)
+    {
+        $db = \DB::get_instance();
         $stmt = $db->prepare("INSERT INTO users VALUES(?,?,1)");
-        $stmt->execute([$uname, $result[0]["pass"]]);
-        $stmt = $db->prepare("DELETE FROM adminreq WHERE uname=?");
-        $stmt->execute([$uname]);
+        $stmt->execute([$username, $password]);
     }
-    public static function disapprovedadmin($uname)
+    public static function ApprovedAdminDelete($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("DELETE FROM adminreq WHERE uname=?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("DELETE FROM adminreq WHERE username=?");
+        $stmt->execute([$username]);
     }
-    public static function checkuser($uname)
+    public static function DisapprovedAdmin($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM users WHERE status=0 AND uname =?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("DELETE FROM adminreq WHERE username=?");
+        $stmt->execute([$username]);
+    }
+    public static function CheckUser($username)
+    {
+        $db = \DB::get_instance();
+        $stmt = $db->prepare("SELECT * FROM users WHERE status=0 AND username =?");
+        $stmt->execute([$username]);
         $result = $stmt->fetch();
-        if ( !empty($result)) {
-            return false;
-        } else {
-            return true;
-        }
+        return $result;
     }
-    public static function checkadmin($uname)
+    public static function CheckAdmin($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM users WHERE status=1 AND uname =?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("SELECT * FROM users WHERE status=1 AND username =?");
+        $stmt->execute([$username]);
         $result = $stmt->fetch();
-        if (!empty($result))
-            return false;
-        else
-            return true;
+        return $result;
     }
-    public static function createadminreq($uname,$hash)
+    public static function CreateAdminReq($username, $hash)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("INSERT INTO adminreq VALUES(?,?)");
-        $stmt->execute([$uname,$hash]);
+        $stmt->execute([$username, $hash]);
     }
 }

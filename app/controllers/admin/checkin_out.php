@@ -7,11 +7,11 @@ class CheckIn_Out {
     public function get(){
         \Controller\Utils::LoggedInAdmin();
         
-        $uname=$_SESSION["uname"];
+        $username=$_SESSION["username"];
         echo \View\Loader::make()->render("templates/adminCC.twig",array(
-            "checkin" => \Model\Books::checkin(),
-            "checkout" => \Model\Books::checkout(),
-            "uname" =>$uname,
+            "checkin" => \Model\Books::Checkin(),
+            "checkout" => \Model\Books::Checkout(),
+            "username" =>$username,
         ));
     }
 }

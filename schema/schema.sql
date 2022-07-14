@@ -1,13 +1,13 @@
 
 CREATE TABLE users(
-    uname varchar(255),
+    username varchar(255),
     pass varchar(255),
     status int,
 );
 
 CREATE TABLE books(
     name varchar(80),
-    uname varchar(80),
+    username varchar(80),
     quantity int,
     date int,
     month int,
@@ -16,7 +16,7 @@ CREATE TABLE books(
 );
 
 CREATE TABLE adminreq(
-    uname varchar(255),
+    username varchar(255),
     pass varchar(255),
 );
 

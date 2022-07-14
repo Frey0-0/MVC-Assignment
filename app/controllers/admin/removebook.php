@@ -12,12 +12,12 @@ class RemoveBook
 
         $name = $_POST["name"];
         $quantity = $_POST["quantity"];
-        $result=\Model\Books::removebook($name, $quantity);
+        $result=\Model\Books::RemoveBook($name, $quantity);
         if (($result[0]["quantity"]) > $quantity) {
-            \Model\Books::removebookupdate($result[0]["quantity"] - $quantity, $name);
+            \Model\Books::RemoveBookUpdate($result[0]["quantity"] - $quantity, $name);
         }
         else{
-            \Model\Books::removebookdelete($name);
+            \Model\Books::RemoveBookDelete($name);
         }
         header("Location:/admin/dashboard");
     }

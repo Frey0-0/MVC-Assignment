@@ -1,15 +1,15 @@
 <?php
 
 namespace Controller;
-session_start(); 
+session_start();
 
-class Approved{
+class DisapprovedReturn{
     public function post(){
         \Controller\Utils::LoggedInAdmin();
         
         $name=$_POST["name"];
-        $uname=$_POST["uname"];
-        \Model\Books::approved($name,$uname);
+        $username=$_POST["username"];
+        \Model\Books::DisapprovedReturn($name,$username);
         header("Location:/admin/checkin_out");
     }
 }

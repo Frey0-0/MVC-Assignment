@@ -7,11 +7,11 @@ class ClientDashboard {
     public function get(){
         \Controller\Utils::LoggedInUser();
 
-        $uname=$_SESSION["uname"];
+        $username=$_SESSION["username"];
         echo \View\Loader::make()->render("templates/client.twig",array(
-            "availablebooks" => \Model\Books::availablebooks(),
-            "issuedbooks" => \Model\Books::issuedbooks($uname),
-            "uname" => $_SESSION["uname"], 
+            "availablebooks" => \Model\Books::AvailableBooks(),
+            "issuedbooks" => \Model\Books::IssuedBooks($username),
+            "username" => $_SESSION["username"], 
         ));
     }
 }

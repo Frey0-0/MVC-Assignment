@@ -7,10 +7,10 @@ class RequestedBooks {
     public function get(){
         \Controller\Utils::LoggedInUser();
 
-        $uname=$_SESSION["uname"];
+        $username=$_SESSION["username"];
         echo \View\Loader::make()->render("templates/clientRB.twig",array(
-            "requestedbooks" => \Model\Books::requestedbooks($uname),
-            "uname" =>$uname,
+            "requestedbooks" => \Model\Books::RequestedBooks($username),
+            "username" =>$username,
         ));
     }
 }

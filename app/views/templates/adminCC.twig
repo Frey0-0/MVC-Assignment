@@ -14,7 +14,7 @@
 		<div id="icon">
 			<img src="/assets/images/icon.png">
 			<p>
-				{{ uname }}</p>
+				{{ username }}</p>
 		</div>
 		<form action="/admin/logout" method="get" id="logout">
 			<button name="logout" id="logout">Logout</button>
@@ -40,20 +40,20 @@
 									{{ book.name }}
 								</td>
 								<td>
-									{{ book.uname }}
+									{{ book.username }}
 								</td>
 								<div id="buttons">
 									<td>
 										<form action="/admin/approved" method="POST">
 											<input type="text" name="name" value="{{ book.name }}" style="display:none">
-											<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
+											<input type="text" name="username" value="{{ book.username }}" style="display:none">
 											<input type="submit" value="Approve" id="button">
 										</form>
 									</td>
 									<td>
 										<form action="/admin/disapproved" method="POST">
 											<input type="text" name="name" value="{{ book.name }}" style="display:none">
-											<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
+											<input type="text" name="username" value="{{ book.username }}" style="display:none">
 											<input type="submit" value="Disapprove" id="button">
 										</form>
 									</td>
@@ -87,7 +87,7 @@
 									{{ book.name }}
 								</td>
 								<td>
-									{{ book.uname }}
+									{{ book.username }}
 								</td>
 								<td>
 									{{ fees }}
@@ -96,14 +96,14 @@
 									<td>
 										<form action="/admin/approvedreturn" method="POST">
 											<input type="text" name="name" value="{{ book.name }}" style="display:none">
-											<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
+											<input type="text" name="username" value="{{ book.username }}" style="display:none">
 											<input type="submit" value="Approve" id="button">
 										</form>
 									</td>
 									<td>
 										<form action="/admin/disapprovedreturn" method="POST">
 											<input type="text" name="name" value="{{ book.name }}" style="display:none">
-											<input type="text" name="uname" value="{{ book.uname }}" style="display:none">
+											<input type="text" name="username" value="{{ book.username }}" style="display:none">
 											<input type="submit" value="Disapprove" id="button">
 										</form>
 									</td>

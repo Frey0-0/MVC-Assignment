@@ -8,14 +8,14 @@ class Authorize {
     }
     public function post(){
 
-        $uname=$_POST["uname"];
-        $pass =$_POST["pass"];
-        $result=\Model\Login::verifyAdmin($uname);
+        $username=$_POST["username"];
+        $password =$_POST["password"];
+        $result=\Model\Login::VerifyAdmin($username);
         if(empty($result)){
             echo \View\Loader::make()->render("templates/authorize.twig", array('flag' => true));
         }
-        else if(password_verify($pass,$result["pass"])){
-            $_SESSION["uname"] = $uname;
+        else if(password_verify($password,$result["password"])){
+            $_SESSION["username"] = $username;
             $_SESSION["status"] = 1;
             $_SESSION["loggedin"] = 1;
             header("Location:/admin/dashboard");

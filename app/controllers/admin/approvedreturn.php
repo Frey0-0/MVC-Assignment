@@ -9,15 +9,15 @@ class ApprovedReturn{
         \Controller\Utils::LoggedInAdmin();
         
         $name=$_POST["name"];
-        $uname=$_POST["uname"];
-        $result= \Model\Books::approvedreturn($name,$uname);
+        $username=$_POST["username"];
+        $result= \Model\Books::ApprovedReturn($name,$username);
         if (!isset($result[0])) {
-            \Model\Books::approvedreturninsert($name);
+            \Model\Books::ApprovedReturnInsert($name);
         }
         else{
-            \Model\Books::approvedreturnupdate($result[0]["quantity"] + 1,$name);
+            \Model\Books::ApprovedReturnUpdate($result[0]["quantity"] + 1,$name);
         }
-        \Model\Books::approvedreturndelete($name,$uname);
+        \Model\Books::ApprovedReturnDelete($name,$username);
         header("Location:/admin/checkin_out");
     }
 }

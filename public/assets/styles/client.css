@@ -51,7 +51,6 @@ img {
     background-color: rgb(246, 232, 220);
     height: 4vh;
     width: 4vw;
-    margin-left: 2vw;
 }
 
 #button {
@@ -94,7 +93,7 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd6e;
+    background-color: #a1f5f1c0;
 }
 
 #table {

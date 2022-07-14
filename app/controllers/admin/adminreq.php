@@ -7,10 +7,10 @@ class AdminReq {
     public function get(){
         \Controller\Utils::LoggedInAdmin();
         
-        $uname=$_SESSION["uname"];
+        $username=$_SESSION["username"];
         echo \View\Loader::make()->render("templates/adminAR.twig",array(
-            "adminreq" => \Model\Users::adminreq(),
-            "uname" =>$uname,
+            "adminreq" => \Model\Users::AdminReq(),
+            "username" =>$username,
         ));
     }
 }

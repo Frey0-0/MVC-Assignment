@@ -8,17 +8,17 @@
 	<div id="form">
 		<div style="margin-left:2vw">
 			<form action="/admin/newadmin" method="POST">
-				Username:<input type="text" name="uname" id="user">
+				Username:<input type="text" name="username" id="user">
 				<br>
-				Password:<input type="password" name="pass" id="pass">
+				Password:<input type="password" name="password" id="password">
 				<br>
-				Confirm Password:<input type="password" name="passc" id="passc">
+				Confirm Password:<input type="password" name="passwordconfirm" id="passwordconfirm">
 				<br>
 				{% if flag %}
 					<p>Passwords don't match</p>
 				{% endif %}
 				{% if flag1 %}
-					<p>Please enter passowrd of appropriate length.</p>
+					<p>Please enter password of appropriate length.</p>
 				{% endif %}
 				{% if flag2 %}
 					<p>Username already taken. Please use another name.</p>

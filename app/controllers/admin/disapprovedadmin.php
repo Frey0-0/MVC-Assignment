@@ -3,12 +3,12 @@
 namespace Controller;
 session_start();
 
-class ApprovedAdmin{
+class DisapprovedAdmin{
     public function post(){
         \Controller\Utils::LoggedInAdmin();
         
-        $uname=$_POST["uname"];
-        \Model\Users::approvedadmin($uname);
+        $username=$_POST["username"];
+        \Model\Users::DisapprovedAdmin($username);
         header("Location:/admin/showadminreq");
     }
 }

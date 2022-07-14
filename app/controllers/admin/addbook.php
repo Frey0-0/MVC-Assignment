@@ -9,7 +9,7 @@ class AddBook {
 
         $name=$_POST["name"];
         $quantity =$_POST["quantity"];
-        \Model\Books::addbook($name,$quantity);
+        \Model\Books::AddBook($name,$quantity);
         header("Location:/admin/dashboard");
     }
 }

@@ -4,50 +4,50 @@ namespace Model;
 
 class Books
 {
-    public static function requestbook($name, $uname)
+    public static function RequestBook($name, $username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM books WHERE status IS NULL AND name=? ");
         $stmt->execute([$name]);
         $result = $stmt->fetch();
-        $s = $db->prepare("INSERT INTO books(name,uname,quantity,date,month,year,status) VALUES (?,?,1,null,null,null,0)");
-        $s->execute([$name, $uname]);
+        $query = $db->prepare("INSERT INTO books(name,username,quantity,date,month,year,status) VALUES (?,?,1,null,null,null,0)");
+        $query->execute([$name, $username]);
         return $result;
     }
 
-    public static function requestbookupdate($quantity, $name)
+    public static function RequestBookUpdate($quantity, $name)
     {
         $db = \DB::get_instance();
-        $s = $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
-        $s->execute([($quantity - 1), $name]);
+        $query = $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
+        $query->execute([($quantity - 1), $name]);
     }
 
-    public static function requestbookdelete($name)
+    public static function RequestBookDelete($name)
     {
         $db = \DB::get_instance();
-        $s = $db->prepare("DELETE FROM books WHERE status IS NULL AND name=?");
-        $s->execute([$name]);
+        $query = $db->prepare("DELETE FROM books WHERE status IS NULL AND name=?");
+        $query->execute([$name]);
     }
 
-    public static function returnbook($name, $uname)
+    public static function ReturnBook($name, $username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("UPDATE books SET status=-1 WHERE name=? AND uname=?");
-        $stmt->execute([$name, $uname]);
-        $stmt = $db->prepare("DELETE FROM books WHERE status=1 AND name=? AND uname=?");
-        $stmt->execute([$name, $uname]);
+        $stmt = $db->prepare("UPDATE books SET status=-1 WHERE name=? AND username=?");
+        $stmt->execute([$name, $username]);
+        $stmt = $db->prepare("DELETE FROM books WHERE status=1 AND name=? AND username=?");
+        $stmt->execute([$name, $username]);
     }
 
-    public static function issuedbooks($uname)
+    public static function IssuedBooks($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status=1 AND uname=?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("SELECT * FROM books WHERE status=1 AND username=?");
+        $stmt->execute([$username]);
         $result = $stmt->fetchAll();
         return $result;
     }
     
-    public static function availablebooks()
+    public static function AvailableBooks()
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM books WHERE status IS NULL");
@@ -56,34 +56,34 @@ class Books
         return $result;
     }
 
-    public static function requestedbooks($uname)
+    public static function RequestedBooks($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status=0 AND uname =?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("SELECT * FROM books WHERE status=0 AND username =?");
+        $stmt->execute([$username]);
         $result = $stmt->fetchAll();
         return $result;
     }
 
-    public static function rejectedrequests($uname)
+    public static function RejectedRequests($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status=2 AND uname =?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("SELECT * FROM books WHERE status=2 AND username =?");
+        $stmt->execute([$username]);
         $result = $stmt->fetchAll();
-        $stmt = $db->prepare("DELETE FROM books WHERE status=2 AND uname =?");
-        $stmt->execute([$uname]);
+        $stmt = $db->prepare("DELETE FROM books WHERE status=2 AND username =?");
+        $stmt->execute([$username]);
         return $result;
     }
 
-    public static function addbook($name, $quantity)
+    public static function AddBook($name, $quantity)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("INSERT INTO  books VALUES(?,NULL,?,NULL,NULL,NULL,NULL)");
         $stmt->execute([$name, $quantity]);
     }
 
-    public static function removebook($name, $quantity)
+    public static function RemoveBook($name, $quantity)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM books WHERE status IS NULL AND name=?");
@@ -92,30 +92,30 @@ class Books
         return $result;
     }
 
-    public static function removebookupdate($quantity, $name)
+    public static function RemoveBookUpdate($quantity, $name)
     {
         $db = \DB::get_instance();
-        $s = $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name =?");
-        $s->execute([$quantity, $name]);
+        $query= $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name =?");
+        $query->execute([$quantity, $name]);
     }
 
-    public static function removebookdelete($name)
+    public static function RemoveBookDelete($name)
     {
         $db = \DB::get_instance();
-        $s = $db->prepare("DELETE FROM books WHERE status IS NULL AND name=?");
-        $s->execute([$name]);
+        $query = $db->prepare("DELETE FROM books WHERE status IS NULL AND name=?");
+        $query->execute([$name]);
     }
 
-    public static function approved($name, $uname)
+    public static function Approved($name, $username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("INSERT INTO books VALUES(?,?,1,?,?,?,1)");
-        $stmt->execute([$name, $uname, date("d"), date("m"), date("Y")]);
-        $stmt = $db->prepare("DELETE FROM books WHERE name=? AND uname=? AND status=0 ");
-        $stmt->execute([$name, $uname]);
+        $stmt->execute([$name, $username, date("d"), date("m"), date("Y")]);
+        $stmt = $db->prepare("DELETE FROM books WHERE name=? AND username=? AND status=0 ");
+        $stmt->execute([$name, $username]);
     }
 
-    public static function disapproved($name, $uname)
+    public static function Disapproved($name, $username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM books WHERE status IS NULL AND name=?");
@@ -124,28 +124,28 @@ class Books
         return $result;
     }
 
-    public static function disapprovedupdate($quantity, $name)
+    public static function DisapprovedUpdate($quantity, $name)
     {
         $db = \DB::get_instance();
-        $s = $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
-        $s->execute([$quantity, $name]);
+        $query= $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
+        $query->execute([$quantity, $name]);
     }
 
-    public static function disapprovedinsert($name)
+    public static function DisapprovedInsert($name)
     {
         $db = \DB::get_instance();
-        $s = $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
-        $s->execute([$name]);
+        $query= $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
+        $query->execute([$name]);
     }
 
-    public static function disapprovedupdate2($uname, $name)
+    public static function DisapprovedUpdate2($username, $name)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("UPDATE books SET status=2 WHERE uname=? AND name=? AND status=0");
-        $stmt->execute([$uname, $name]);
+        $stmt = $db->prepare("UPDATE books SET status=2 WHERE username=? AND name=? AND status=0");
+        $stmt->execute([$username, $name]);
     }
 
-    public static function approvedreturn($name, $uname)
+    public static function ApprovedReturn($name, $username)
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM books where status IS NULL AND name=?");
@@ -154,34 +154,34 @@ class Books
         return $result;
     }
 
-    public static function approvedreturninsert($name)
+    public static function ApprovedReturnInsert($name)
     {
         $db = \DB::get_instance();
-        $s = $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
-        $s->execute([$name]);
+        $query = $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
+        $query->execute([$name]);
     }
-    public static function approvedreturnupdate($quantity, $name)
+    public static function ApprovedReturnUpdate($quantity, $name)
     {
         $db = \DB::get_instance();
-        $s = $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL and name=?");
-        $s->execute([$quantity, $name]);
-    }
-
-    public static function approvedreturndelete($name, $uname)
-    {
-        $db = \DB::get_instance();
-        $stmt = $db->prepare("DELETE FROM books WHERE status=-1 AND name=? AND uname=?");
-        $stmt->execute([$name, $uname]);
+        $query = $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL and name=?");
+        $query->execute([$quantity, $name]);
     }
 
-    public static function disapprovedreturn($name, $uname)
+    public static function ApprovedReturnDelete($name, $username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("UPDATE books SET status=1 WHERE uname=? AND name=? AND status=-1");
-        $stmt->execute([$uname, $name]);
+        $stmt = $db->prepare("DELETE FROM books WHERE status=-1 AND name=? AND username=?");
+        $stmt->execute([$name, $username]);
     }
 
-    public static function unavailablebooks()
+    public static function DisapprovedReturn($name, $username)
+    {
+        $db = \DB::get_instance();
+        $stmt = $db->prepare("UPDATE books SET status=1 WHERE username=? AND name=? AND status=-1");
+        $stmt->execute([$username, $name]);
+    }
+
+    public static function UnavailableBooks()
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM books WHERE status=1");
@@ -190,7 +190,7 @@ class Books
         return $result;
     }
 
-    public static function checkout()
+    public static function Checkout()
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM books WHERE status=0");
@@ -198,8 +198,8 @@ class Books
         $result = $stmt->fetchAll();
         return $result;
     }
-    
-    public static function checkin()
+
+    public static function Checkin()
     {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM books WHERE status=-1");
