@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
 * {
     font-family: 'Roboto', sans-serif;
     color: white;
 }
-body{
+
+body {
     background-image: url("../images/library2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -31,15 +33,17 @@ body{
     background-color: rgb(112, 230, 208);
     color: black;
 }
-img{
+
+img {
     width: 28px;
     height: 28px;
     margin-top: 4vh;
 }
-#icon{
+
+#icon {
     display: flex;
     flex-direction: row;
-    gap:0.5vw;
+    gap: 0.5vw;
 }
 
 #foo {
@@ -49,10 +53,12 @@ img{
     width: 4vw;
     margin-left: 2vw;
 }
+
 #button {
     color: black;
     background-color: rgb(111, 234, 127);
 }
+
 #button:hover {
     color: black;
     background-color: rgb(218, 233, 123);
@@ -95,16 +101,18 @@ tr:nth-child(even) {
     width: 40vw;
 }
 
-#profile{
+#profile {
     display: flex;
     flex-direction: column;
     padding-left: 88vw;
     gap: 0vh;
 }
-p{
+
+p {
     font-size: 28px;
 }
-#c1{
+
+#c1 {
     padding-top: 2vh;
     display: flex;
     flex-direction: column;

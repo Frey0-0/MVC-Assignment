@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
-*{
+
+* {
   font-size: 2vw;
   font-family: 'Roboto', sans-serif;
 }
+
 body {
   background-image: url("../images/library.jpg");
   background-size: cover;
@@ -14,7 +16,7 @@ body {
 }
 
 
- #form {
+#form {
   width: 36vw;
   background-color: rgba(57, 172, 229, 0.661);
   margin-left: 28vw;
@@ -27,6 +29,7 @@ body {
 #login {
   background-color: white;
 }
+
 #login:hover {
   background-color: rgb(249, 169, 169);
 }
@@ -51,16 +54,19 @@ body {
   margin-left: 12vw;
   margin-top: 2vh;
 }
-p{
+
+p {
   font-size: 1.2vw;
   color: rgb(244, 234, 234);
   margin-left: 2vw;
-} 
-#link{
+}
+
+#link {
   font-size: 1.2vw;
-  color:rgb(239, 243, 8);
+  color: rgb(239, 243, 8);
   font-family: 'Roboto', sans-serif;
 }
-#link:hover{
+
+#link:hover {
   color: rgba(149, 243, 8, 0.976);
 }

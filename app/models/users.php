@@ -12,6 +12,7 @@ class Users
         $stmt = $db->prepare("INSERT INTO users (uname,pass,status) VALUES (?,?,?)");
         $stmt->execute([$uname, $pass, $status]);
     }
+
     public static function checkadminreq($uname)
     {
         $db = \DB::get_instance();
@@ -23,6 +24,7 @@ class Users
         else
             return true;
     }
+    
     public static function adminreq()
     {
         $db = \DB::get_instance();

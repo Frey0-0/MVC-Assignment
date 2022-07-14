@@ -32,11 +32,13 @@ body {
     color: antiquewhite;
     background-color: rgba(0, 0, 0, 0.566);
 }
+
 #button:hover {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+
 #heading {
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
@@ -53,12 +55,11 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 32px;
     margin-left: 20vw;
-    background: -webkit-linear-gradient(left,rgb(245, 99, 99), rgb(245, 234, 234));
+    background: -webkit-linear-gradient(left, rgb(245, 99, 99), rgb(245, 234, 234));
     background: -o-linear-gradient(right, rgb(245, 99, 99), rgba(245, 234, 234));
     background: -moz-linear-gradient(right, rgb(245, 99, 99), rgba(245, 234, 234));
-    background: linear-gradient(to right, rgb(245, 99, 99) , rgba(245, 234, 234)); 
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, rgb(245, 99, 99), rgba(245, 234, 234));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-top: 20vh;
 }
-
