@@ -1,6 +1,7 @@
 <?php
 
 namespace Controller;
+
 session_start();
 
 class LogOut

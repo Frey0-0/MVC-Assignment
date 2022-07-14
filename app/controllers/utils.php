@@ -8,7 +8,7 @@ class Utils
 {
     public static function loggedInUser()
     {
-        if (!((isset($_SESSION["loggedin"])) && $_SESSION['status'] === 0)){
+        if (!((isset($_SESSION["loggedin"])) && $_SESSION['status'] === 0)) {
             header("Location: /");
         }
     }

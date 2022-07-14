@@ -7,12 +7,17 @@ class Books
     public static function requestBook($name, $username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status IS NULL AND name=? ");
-        $stmt->execute([$name]);
-        $result = $stmt->fetch();
+        $query = $db->prepare("SELECT * FROM books WHERE status IS NULL AND name=? ");
+        $query->execute([$name]);
+        $result =  $query->fetch();
+        return $result;
+    }
+
+    public static function requestBookInsert($name,$username)
+    {
+        $db = \DB::get_instance();
         $query = $db->prepare("INSERT INTO books(name,username,quantity,date,month,year,status) VALUES (?,?,1,null,null,null,0)");
         $query->execute([$name, $username]);
-        return $result;
     }
 
     public static function requestBookUpdate($quantity, $name)
@@ -32,70 +37,72 @@ class Books
     public static function returnBook($name, $username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("UPDATE books SET status=-1 WHERE name=? AND username=?");
-        $stmt->execute([$name, $username]);
-        $stmt = $db->prepare("DELETE FROM books WHERE status=1 AND name=? AND username=?");
-        $stmt->execute([$name, $username]);
+        $query = $db->prepare("UPDATE books SET status=-1 WHERE name=? AND username=?");
+        $query->execute([$name, $username]);
     }
-
+    
     public static function issuedBooks($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status=1 AND username=?");
-        $stmt->execute([$username]);
-        $result = $stmt->fetchAll();
+        $query = $db->prepare("SELECT * FROM books WHERE status=1 AND username=?");
+        $query ->execute([$username]);
+        $result =  $query ->fetchAll();
         return $result;
     }
-    
+
     public static function availableBooks()
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status IS NULL");
-        $stmt->execute();
-        $result = $stmt->fetchAll();
+        $query = $db->prepare("SELECT * FROM books WHERE status IS NULL");
+        $query ->execute();
+        $result =  $query ->fetchAll();
         return $result;
     }
 
     public static function requestedBooks($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status=0 AND username =?");
-        $stmt->execute([$username]);
-        $result = $stmt->fetchAll();
+        $query  = $db->prepare("SELECT * FROM books WHERE status=0 AND username =?");
+        $query ->execute([$username]);
+        $result =  $query ->fetchAll();
         return $result;
     }
 
     public static function rejectedRequests($username)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status=2 AND username =?");
-        $stmt->execute([$username]);
-        $result = $stmt->fetchAll();
-        $stmt = $db->prepare("DELETE FROM books WHERE status=2 AND username =?");
-        $stmt->execute([$username]);
+        $query  = $db->prepare("SELECT * FROM books WHERE status=2 AND username =?");
+        $query ->execute([$username]);
+        $result =  $query ->fetchAll();
         return $result;
+    }
+    public static function rejectedRequestsDelete($username)
+    {
+        $db = \DB::get_instance();
+        $query  = $db->prepare("DELETE FROM books WHERE status=2 AND username =?");
+        $query ->execute([$username]);
     }
 
     public static function addBook($name, $quantity)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("INSERT INTO  books VALUES(?,NULL,?,NULL,NULL,NULL,NULL)");
-        $stmt->execute([$name, $quantity]);
+        $query  = $db->prepare("INSERT INTO  books VALUES(?,NULL,?,NULL,NULL,NULL,NULL)");
+        $query ->execute([$name, $quantity]);
     }
 
     public static function removeBook($name, $quantity)
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM books WHERE status IS NULL AND name=?");
-        $stmt->execute([$name]);
-        $result = $stmt->fetchAll();
+        $query  = $db->prepare("SELECT * FROM books WHERE status IS NULL AND name=?");
+        $query ->execute([$name]);
+        $result =  $query ->fetchAll();
         return $result;
     }
 
     public static function removeBookUpdate($quantity, $name)
     {
         $db = \DB::get_instance();
-        $query= $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name =?");
+        $query = $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name =?");
         $query->execute([$quantity, $name]);
     }
 
@@ -127,14 +134,14 @@ class Books
     public static function disapprovedUpdate($quantity, $name)
     {
         $db = \DB::get_instance();
-        $query= $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
+        $query = $db->prepare("UPDATE books SET quantity=? WHERE status IS NULL AND name=?");
         $query->execute([$quantity, $name]);
     }
 
     public static function disapprovedInsert($name)
     {
         $db = \DB::get_instance();
-        $query= $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
+        $query = $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
         $query->execute([$name]);
     }
 

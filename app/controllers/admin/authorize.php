@@ -11,6 +11,7 @@ class Authorize {
         $username=$_POST["username"];
         $password =$_POST["password"];
         $result=\Model\LogIn::verifyAdmin($username);
+        
         if(empty($result)){
             echo \View\Loader::make()->render("templates/authorize.twig", array('flag' => true));
         }
@@ -18,6 +19,7 @@ class Authorize {
             $_SESSION["username"] = $username;
             $_SESSION["status"] = 1;
             $_SESSION["loggedin"] = 1;
+
             header("Location:/admin/dashboard");
         }
         else{

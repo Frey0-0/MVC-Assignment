@@ -13,9 +13,11 @@ class Disapproved
         $name = $_POST["name"];
         $username = $_POST["username"];
         $result = \Model\Books::disapproved($name, $username);
+
         if (isset($result[0])) {
             \Model\Books::disapprovedUpdate($result[0]["quantity"] + 1, $name);
-        } else {
+        } 
+        else {
             \Model\Books::disapprovedInsert($name);
         }
         \Model\Books::DisapprovedUpdate2($username, $name);

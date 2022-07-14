@@ -16,18 +16,23 @@ class NewAdmin
         $username = $_POST["username"];
         $password = $_POST["password"];
         $passwordconfirm = $_POST["passwordconfirm"];
+
         $result = \Model\Users::checkAdmin($username);
         if (!empty($result)) {
             $flag = false;
-        } else {
+        } 
+        else {
             $flag = true;
         }
+
         $result = \Model\Users::checkAdminReq($username);
         if (!empty($result)) {
             $flag1 = false;
-        } else {
+        } 
+        else {
             $flag1 = true;
         }
+
         if ($flag && $flag1) {
             if (strlen($password) < 8) {
                 echo \View\Loader::make()->render("templates/registeradmin.twig", array("flag1" => true));
