@@ -45,6 +45,7 @@ body {
     font-size: 40px;
     margin-left: 20vw;
     background: -webkit-linear-gradient(rgb(245, 99, 99), rgb(245, 234, 234));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-top: 16vh;
@@ -59,6 +60,7 @@ body {
     background: -o-linear-gradient(right, rgb(245, 99, 99), rgba(245, 234, 234));
     background: -moz-linear-gradient(right, rgb(245, 99, 99), rgba(245, 234, 234));
     background: linear-gradient(to right, rgb(245, 99, 99), rgba(245, 234, 234));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-top: 20vh;
