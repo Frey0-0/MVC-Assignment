@@ -46,7 +46,7 @@ img {
     gap: 0.5vw;
 }
 
-#foo {
+#logout {
     color: black;
     background-color: rgb(246, 232, 220);
     height: 4vh;
@@ -70,7 +70,7 @@ img {
     gap: 12vw;
 }
 
-#c {
+#listblock {
     display: flex;
     flex-direction: column;
     width: 40vw;
@@ -112,7 +112,7 @@ p {
     font-size: 28px;
 }
 
-#c1 {
+#listblock1 {
     padding-top: 2vh;
     display: flex;
     flex-direction: column;
