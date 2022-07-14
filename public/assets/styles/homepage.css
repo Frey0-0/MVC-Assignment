@@ -1,34 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+body {
+    background-image: url("../images/homepage.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100vw;
+    height: 80vh;
+    margin: 0vw;
+}
+
 #a {
     display: flex;
     flex-direction: row;
     width: 100vw;
-    height: 100vh;
+    margin-top: 12vh;
 }
 
-#b {
-    background-color: rgb(23, 198, 211);
-    width: 50vw;
-    height: 100vh;
+#roles {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    margin-top: 6vh;
+    gap: 8vh;
 }
 
-#c {
-    background-color: yellow;
-    width: 50vw;
-    height: 100vh;
-    align-content: center;
-}
-
-#d {
+#button {
     margin-left: 18vw;
-    margin-top: 44vh;
     font-size: 32px;
     padding: 32px;
+    color: antiquewhite;
+    background-color: rgba(0, 0, 0, 0.566);
+}
+#button:hover {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+#heading {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    font-size: 40px;
+    margin-left: 20vw;
+    background: -webkit-linear-gradient(rgb(245, 99, 99), rgb(245, 234, 234));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 16vh;
+    /* -webkit-text-stroke: 1.5px black; */
 }
 
-#e {
-    margin-left: 18vw;
-    margin-top: 44vh;
+#choose {
+    font-family: 'Roboto', sans-serif;
     font-size: 32px;
-    padding: 32px;
-    background-color: rgb(231, 161, 31);
+    margin-left: 20vw;
+    background: -webkit-linear-gradient(left,rgb(245, 99, 99), rgb(245, 234, 234));
+    background: -o-linear-gradient(right, rgb(245, 99, 99), rgba(245, 234, 234));
+    background: -moz-linear-gradient(right, rgb(245, 99, 99), rgba(245, 234, 234));
+    background: linear-gradient(to right, rgb(245, 99, 99) , rgba(245, 234, 234)); 
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+    margin-top: 20vh;
 }
+

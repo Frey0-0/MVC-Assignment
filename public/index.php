@@ -18,8 +18,12 @@ Toro::serve(array(
     "/admin/approved" => "\Controller\Approved",
     "/admin/disapproved" => "\Controller\Disapproved",
     "/admin/approvedreturn" => "\Controller\ApprovedReturn",
-    "/admin/disapprovedreturn" => "\Controller\Disapprovedreturn",
+    "/admin/disapprovedreturn" => "\Controller\DisapprovedReturn",
     "/admin/newadmin" => "\Controller\NewAdmin",
     "/admin/approvedadmin" => "\Controller\ApprovedAdmin",
     "/admin/disapprovedadmin" => "\Controller\DisapprovedAdmin",
+    "/client/requestedbooks" => "\Controller\RequestedBooks",
+    "/client/rejectedrequests" => "\Controller\RejectedRequests",
+    "/admin/checkin_out" => "\Controller\CheckIn_Out",
+    "/admin/showadminreq" => "\Controller\AdminReq"
 ));

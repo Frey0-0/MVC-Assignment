@@ -1,1 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+*{
+  font-size: 2vw;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  background-image: url("../images/library.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: black;
+  margin: 0vh;
+  height: 64vh;
+}
 
+
+ #form {
+  width: 36vw;
+  background-color: rgba(26, 31, 72, 0.661);
+  margin-left: 28vw;
+  margin-top: 28vh;
+  align-self: center;
+  border-radius: 25px;
+  height: 40vh;
+}
+
+#login {
+  background-color: white;
+}
+#login:hover {
+  background-color: rgb(249, 169, 169);
+}
+
+#user {
+  margin-top: 4vh;
+  height: 6vh;
+  width: 20vw;
+  color: black;
+}
+
+#pass {
+  height: 6vh;
+  width: 20vw;
+  color: black;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  margin-left: 12vw;
+  margin-top: 2vh;
+}
+p{
+  font-size: 1.2vw;
+  color: rgb(244, 234, 234);
+  margin-left: 2vw;
+} 
+#link{
+  font-size: 1.2vw;
+  color:rgba(255, 255, 0, 0.455);
+  font-family: 'Roboto', sans-serif;
+}
+#link:hover{
+  color:rgba(255, 255, 0, 0.976) ;
+}
