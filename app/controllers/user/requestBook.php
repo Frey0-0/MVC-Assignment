@@ -12,7 +12,7 @@ class RequestBook
 
         $name = $_POST["name"];
         $username = $_SESSION["username"];
-        $result = \Model\Books::requestBook($name, $username);
+        $result = \Model\Books::requestBook($name);
 
         if ($result["quantity"] > 1) {
             $quantity = $result["quantity"];

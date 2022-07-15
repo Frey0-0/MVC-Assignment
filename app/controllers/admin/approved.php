@@ -13,6 +13,7 @@ class Approved
         $name = $_POST["name"];
         $username = $_POST["username"];
         \Model\Books::approved($name, $username);
+        \Model\Books::approvedDelete($name, $username);
 
         header("Location:/admin/checkin_out");
     }

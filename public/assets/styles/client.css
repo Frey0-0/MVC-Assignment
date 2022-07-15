@@ -93,7 +93,7 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #a1f5f1c0;
+    background-color: rgba(112, 230, 208, 0.785);
 }
 
 #table {

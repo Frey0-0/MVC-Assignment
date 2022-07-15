@@ -16,7 +16,7 @@ class Users
     public static function checkAdminReq($username)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("SELECT * FROM adminreq WHERE username =?");
+        $query = $db->prepare("SELECT username FROM adminreq WHERE username =?");
         $query->execute([$username]);
         $result =  $query ->fetch();
         return $result;
@@ -25,7 +25,7 @@ class Users
     public static function adminReq()
     {
         $db = \DB::get_instance();
-        $query= $db->prepare("SELECT * FROM adminreq");
+        $query= $db->prepare("SELECT username FROM adminreq");
         $query->execute();
         $result = $query->fetchAll();
         return $result;
@@ -33,7 +33,7 @@ class Users
     public static function approvedAdmin($username)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("SELECT * FROM adminreq WHERE username=?");
+        $query = $db->prepare("SELECT username,password FROM adminreq WHERE username=?");
         $query->execute([$username]);
         $result = $query->fetchAll();
         return $result;
@@ -60,7 +60,7 @@ class Users
     public static function checkUser($username)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("SELECT * FROM users WHERE status=0 AND username =?");
+        $query = $db->prepare("SELECT username FROM users WHERE status=0 AND username =?");
         $query->execute([$username]);
         $result =  $query ->fetch();
         return $result;
@@ -68,7 +68,7 @@ class Users
     public static function checkAdmin($username)
     {
         $db = \DB::get_instance();
-        $query  = $db->prepare("SELECT * FROM users WHERE status=1 AND username =?");
+        $query  = $db->prepare("SELECT username FROM users WHERE status=1 AND username =?");
         $query ->execute([$username]);
         $result =  $query ->fetch();
         return $result;
