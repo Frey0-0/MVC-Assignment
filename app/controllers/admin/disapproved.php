@@ -21,6 +21,7 @@ class Disapproved
             \Model\Books::disapprovedInsert($name);
         }
         \Model\Books::DisapprovedUpdate2($username, $name);
+        
         header("Location:/admin/checkin_out");
     }
 }

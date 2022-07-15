@@ -16,8 +16,8 @@ class Books
     public static function requestBookInsert($name,$username)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("INSERT INTO books(name,username,quantity,date,month,year,status) VALUES (?,?,1,null,null,null,0)");
-        $query->execute([$name, $username]);
+        $query = $db->prepare("INSERT INTO books(name,username,quantity,date,month,year,status) VALUES (?,?,1,null,null,null,?)");
+        $query->execute([$name, $username,\Enum\BookStatus::request]);
     }
 
     public static function requestBookUpdate($quantity, $name)
@@ -37,15 +37,15 @@ class Books
     public static function returnBook($name, $username)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("UPDATE books SET status=-1 WHERE name=? AND username=?");
-        $query->execute([$name, $username]);
+        $query = $db->prepare("UPDATE books SET status=? WHERE name=? AND username=?");
+        $query->execute([\Enum\BookStatus::return,$name, $username]);
     }
     
     public static function issuedBooks($username)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("SELECT name FROM books WHERE status=1 AND username=?");
-        $query ->execute([$username]);
+        $query = $db->prepare("SELECT name FROM books WHERE status=? AND username=?");
+        $query ->execute([\Enum\BookStatus::issued,$username]);
         $result =  $query ->fetchAll();
         return $result;
     }
@@ -62,8 +62,8 @@ class Books
     public static function requestedBooks($username)
     {
         $db = \DB::get_instance();
-        $query  = $db->prepare("SELECT name FROM books WHERE status=0 AND username =?");
-        $query ->execute([$username]);
+        $query  = $db->prepare("SELECT name FROM books WHERE status=? AND username =?");
+        $query ->execute([\Enum\BookStatus::request,$username]);
         $result =  $query ->fetchAll();
         return $result;
     }
@@ -71,23 +71,23 @@ class Books
     public static function rejectedRequests($username)
     {
         $db = \DB::get_instance();
-        $query  = $db->prepare("SELECT name FROM books WHERE status=2 AND username =?");
-        $query ->execute([$username]);
+        $query  = $db->prepare("SELECT name FROM books WHERE status=? AND username =?");
+        $query ->execute([,\Enum\BookStatus::rejected,$username]);
         $result =  $query ->fetchAll();
         return $result;
     }
     public static function rejectedRequestsDelete($username)
     {
         $db = \DB::get_instance();
-        $query  = $db->prepare("DELETE FROM books WHERE status=2 AND username =?");
-        $query ->execute([$username]);
+        $query  = $db->prepare("DELETE FROM books WHERE status=? AND username =?");
+        $query ->execute([,\Enum\BookStatus::rejected,$username]);
     }
 
     public static function addBook($name, $quantity)
     {
         $db = \DB::get_instance();
-        $query  = $db->prepare("INSERT INTO  books VALUES(?,NULL,?,NULL,NULL,NULL,NULL)");
-        $query ->execute([$name, $quantity]);
+        $query  = $db->prepare("INSERT INTO  books VALUES(?,NULL,?,NULL,NULL,NULL,?)");
+        $query ->execute([$name, $quantity,,\Enum\BookStatus::available]);
     }
 
     public static function removeBook($name, $quantity)
@@ -116,14 +116,14 @@ class Books
     public static function approved($name, $username)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("INSERT INTO books VALUES(?,?,1,?,?,?,1)");
-        $query->execute([$name, $username, date("d"), date("m"), date("Y")]);
+        $query = $db->prepare("INSERT INTO books VALUES(?,?,1,?,?,?,?)");
+        $query->execute([$name, $username, date("d"), date("m"), date("Y"),,\Enum\BookStatus::issued]);
     }
 
     public static function approvedDelete($name,$username){
         $db = \DB::get_instance();
-        $query = $db->prepare("DELETE FROM books WHERE name=? AND username=? AND status=0 ");
-        $query->execute([$name, $username]);
+        $query = $db->prepare("DELETE FROM books WHERE name=? AND username=? AND status=? ");
+        $query->execute([$name, $username,,\Enum\BookStatus::request]);
     }
 
     public static function disapproved($name, $username)
@@ -145,15 +145,15 @@ class Books
     public static function disapprovedInsert($name)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
-        $query->execute([$name]);
+        $query = $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,?)");
+        $query->execute([$name,,\Enum\BookStatus::available]);
     }
 
     public static function disapprovedUpdate2($username, $name)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("UPDATE books SET status=2 WHERE username=? AND name=? AND status=0");
-        $query->execute([$username, $name]);
+        $query = $db->prepare("UPDATE books SET status=? WHERE username=? AND name=? AND status=0");
+        $query->execute([,\Enum\BookStatus::rejected,$username, $name]);
     }
 
     public static function approvedReturn($name, $username)
@@ -168,8 +168,8 @@ class Books
     public static function approvedReturnInsert($name)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,NULL)");
-        $query->execute([$name]);
+        $query = $db->prepare("INSERT INTO books VALUES(?,NULL,1,NULL,NULL,NULL,?)");
+        $query->execute([$name,,\Enum\BookStatus::available]);
     }
     public static function approvedReturnUpdate($quantity, $name)
     {
@@ -188,15 +188,15 @@ class Books
     public static function disapprovedReturn($name, $username)
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("UPDATE books SET status=1 WHERE username=? AND name=? AND status=-1");
-        $query->execute([$username, $name]);
+        $query = $db->prepare("UPDATE books SET status=? WHERE username=? AND name=? AND status=?");
+        $query->execute([\Enum\BookStatus::issued,$username, $name,\Enum\BookStatus::return]);
     }
 
     public static function unavailableBooks()
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("SELECT name,username FROM books WHERE status=1");
-        $query->execute();
+        $query = $db->prepare("SELECT name,username FROM books WHERE status=?");
+        $query->execute([\Enum\BookStatus::issued]);
         $result = $query->fetchAll();
         return $result;
     }
@@ -204,8 +204,8 @@ class Books
     public static function checkout()
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("SELECT name,username FROM books WHERE status=0");
-        $query->execute();
+        $query = $db->prepare("SELECT name,username FROM books WHERE status=?");
+        $query->execute([\Enum\BookStatus::request]);
         $result = $query->fetchAll();
         return $result;
     }
@@ -213,8 +213,8 @@ class Books
     public static function checkin()
     {
         $db = \DB::get_instance();
-        $query = $db->prepare("SELECT name,username,date,month,year FROM books WHERE status=-1");
-        $query->execute();
+        $query = $db->prepare("SELECT name,username,date,month,year FROM books WHERE status=?");
+        $query->execute([\Enum\BookStatus::return]);
         $result = $query->fetchAll();
         return $result;
     }

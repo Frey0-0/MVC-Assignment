@@ -33,8 +33,8 @@ class NewUser
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 \Model\Users::createUser($username, $hash);
                 $_SESSION["username"] = $username;
-                $_SESSION["status"] = 0;
-                $_SESSION["loggedin"] = 1;
+                $_SESSION["status"] = \Enum\UserRole::user;
+                $_SESSION["loggedin"] = \Enum\LoginStatus::loggedin;
                 
                 header("Location:/client/dashboard");
             } 

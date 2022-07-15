@@ -7,6 +7,8 @@ The database connections and database queries have been handled with the help of
 
 ## Dependencies
 It is built on the ToroPHP web framework and the templating engine used is twig version 3.0.
+It usses Composer verison 2.3.10, MySQL version 8.0.29 and Apache2 version 2.4.41 on a Linux OS Ubuntu 20.04.
+The version of PHP used is 7.4.3.
 
 You can refer its documentation on the following links:
     1. ToroPHP - https://github.com/anandkunal/ToroPHP
@@ -24,7 +26,7 @@ Run the following commands
 sudo a2ensite <Domain Name>
 sudo service apache2 reload
 ```
-* The site should be running now
+*The site should be running now
 ## Usage
 * There are separate dashboards for users and admins. Each user can see the available books and the books issues by them.
 * The admin approves all the checkin and checkout of books. They can also add or remove books from the library which are present in the available lot.

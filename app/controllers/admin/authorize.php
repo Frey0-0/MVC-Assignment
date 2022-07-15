@@ -17,8 +17,8 @@ class Authorize {
         }
         else if(password_verify($password,$result["password"])){
             $_SESSION["username"] = $username;
-            $_SESSION["status"] = 1;
-            $_SESSION["loggedin"] = 1;
+            $_SESSION["status"] = \Enum\UserRole::admin;
+            $_SESSION["loggedin"] = \Enum\LoginStatus::loggedin;
 
             header("Location:/admin/dashboard");
         }

@@ -22,8 +22,9 @@ class Authenticate
         } 
         else if (password_verify($password, $result["password"])) {
             $_SESSION["username"] = $username;
-            $_SESSION["status"] = 0;
-            $_SESSION["loggedin"] = 1;
+            $_SESSION["status"] = \Enum\UserRole::user;
+            $_SESSION["loggedin"] = \Enum\LoginStatus::loggedin;
+
             header("Location:/client/dashboard");
         } 
         else {
