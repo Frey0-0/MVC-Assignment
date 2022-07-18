@@ -15,21 +15,15 @@ class NewUser
     {
         $username = $_POST["username"];
         $password = $_POST["password"];
-        $passwordconfirm = $_POST["passwordconfirm"];
+        $password_confirm = $_POST["password_confirm"];
 
         $result = \Model\Users::checkUser($username);
-        if (!empty($result)) {
-            $flag = false;
-        } 
-        else {
-            $flag = true;
-        }
-
-        if ($flag) {
+        
+        if (empty($result)) {
             if (strlen($password) < 8) {
                 echo \View\Loader::make()->render("templates/register.twig", array("flag1" => true));
             } 
-            else if ($password == $passwordconfirm) {
+            else if ($password == $password_confirm) {
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 \Model\Users::createUser($username, $hash);
                 $_SESSION["username"] = $username;
