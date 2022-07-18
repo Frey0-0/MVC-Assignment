@@ -1,8 +1,8 @@
 
 CREATE TABLE users(
     username varchar(255),
-    pass varchar(255),
-    status int,
+    password varchar(255),
+    status int
 );
 
 CREATE TABLE books(
@@ -12,12 +12,12 @@ CREATE TABLE books(
     date int,
     month int,
     year int,
-    status int,
+    status int
 );
 
 CREATE TABLE adminreq(
     username varchar(255),
-    pass varchar(255),
+    password varchar(255)
 );
 
 INSERT INTO users VALUES("Thor","$2y$10$yifnRRLNU1Edr8mBo1ibnOn1AZHqzEcZz7AO24vWNtRE2lp3Nmrpe",1);
