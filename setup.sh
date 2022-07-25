@@ -13,6 +13,7 @@ if [[ -f "config/config.php" ]]; then
     cd public
     php -S localhost:5000
 
+
 else
 
     touch config/config.php
